@@ -1,7 +1,7 @@
 <script setup>
 import Giscus from "@giscus/vue"
 
-import { ref, watch, onMounted } from "vue"
+import { ref, watch, computed, onMounted } from "vue"
 import { usePageData } from "@vuepress/client"
 import { useDarkMode } from "../composables/useDarkMode"
 const page = usePageData()
@@ -26,6 +26,12 @@ const colorTheme = ref("")
 watch(useDarkMode(), (darkMode) => {
 	colorTheme.value = darkMode ? darkTheme : theme
 })
+const cpdStrict = computed(() => {
+	return strict ? 1 : 0
+})
+const cpdReactions = computed(() => {
+	return reactionsEnabled ? 1 : 0
+})
 
 onMounted(() => {
 	colorTheme.value = useDarkMode().value ? darkTheme : theme
@@ -37,15 +43,16 @@ onMounted(() => {
 	<div class="giscus-warraper">
 		<Giscus
 			class="giscus-body"
+			host="https://giscus.app"
 			:repo="repo"
 			:repoId="repoId"
 			:category="category"
 			:categoryId="categoryId"
 			:mapping="mapping"
-			:reactionsEnabled="reactionsEnabled"
+			:reactionsEnabled="cpdReactions"
 			:emitMetadata="emitMetadata"
 			:inputPosition="inputPosition"
-			:strict="strict"
+			:strict="cpdStrict"
 			:theme="colorTheme"
 			:lang="lang"
 		/>
