@@ -4,11 +4,15 @@ import Page from "@theme/Page.vue"
 
 import { computed } from "vue"
 import { usePageData, usePageFrontmatter } from "@vuepress/client"
+import type { DefaultThemePageFrontmatter } from "../../shared"
 import { useThemeLocaleData } from "../composables"
+import { useBlogCategory } from "vuepress-plugin-blog2/client"
 
 const page = usePageData()
+const blogCategory = useBlogCategory()
+const frontmatter = usePageFrontmatter<DefaultThemePageFrontmatter>()
 const themeLocale = useThemeLocaleData()
-console.log("page", page.value)
+console.log(page.value, blogCategory.value)
 
 // navbar
 const shouldShowNavbar = computed(
@@ -19,30 +23,20 @@ const shouldShowNavbar = computed(
 <template>
 	<div class="theme-tag-view-container">
 		<slot name="navbar">
-			<Navbar v-if="shouldShowNavbar">
-				<template #before>
-					<slot name="navbar-before" />
-				</template>
-				<template #after>
-					<slot name="navbar-after" />
-				</template>
-			</Navbar>
+			<Navbar v-if="shouldShowNavbar"> </Navbar>
 		</slot>
 
 		<slot name="page">
 			<Transition name="fade-slide-y" mode="out-in">
-				<Page :key="page.path">
+				<Page :key="page.path" :isSubsidebar="false">
 					<template #top>
-						<slot name="page-top" />
+						<span>{{blogCategory.map}}</span>
 					</template>
 					<template #content-top>
-						<slot name="page-content-top" />
 					</template>
 					<template #content-bottom>
-						<slot name="page-content-bottom" />
 					</template>
 					<template #bottom>
-						<slot name="page-bottom" />
 					</template>
 				</Page>
 			</Transition>
@@ -50,4 +44,6 @@ const shouldShowNavbar = computed(
 	</div>
 </template>
 
-<style lang="postcss"></style>
+<style lang="postcss">
+
+</style>

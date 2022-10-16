@@ -38,6 +38,7 @@
 	},
 	"dependencies": {
 		"@giscus/vue": "^2.2.0",
+		"@headlessui/vue": "^1.7.3",
 		"axios": "^1.0.0-alpha.1"
 	}
 }

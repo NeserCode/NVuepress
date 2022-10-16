@@ -162,13 +162,13 @@ export default defineUserConfig({
       category: [
         {
           key: "tag",
-          getter: ({ frontmatter }) => frontmatter.tag || [],
+          getter: ({ frontmatter }) => (frontmatter.tag || []),
           path: "/tag/",
           layout: "TagPage",
-          frontmatter: () => ({ title: "标签页" }),
+          frontmatter: () => ({ title: "标签分类" }),
           itemPath: "/tag/:name/",
-          itemLayout: "404",
-          itemFrontmatter: (name) => ({ title: `${name}标签` }),
+          itemLayout: "Layout",
+          itemFrontmatter: (name) => ({ title: `🏷 ${name}` }),
         },
       ],
       type: [

@@ -4,6 +4,7 @@ import { Badge, CodeGroup, CodeGroupItem } from './components/global/index.js';
 import { setupDarkMode, setupSidebarItems, useScrollPromise, } from './composables/index.js';
 import Layout from './layouts/Layout.vue';
 import NotFound from './layouts/404.vue';
+import TagPage from './layouts/TagPage.vue';
 import './styles/index.scss';
 export default defineClientConfig({
     enhance({ app, router }) {
@@ -40,5 +41,6 @@ export default defineClientConfig({
     layouts: {
         Layout,
         NotFound,
+        TagPage,
     },
 });
