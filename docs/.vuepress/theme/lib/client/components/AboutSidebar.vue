@@ -3,7 +3,6 @@ import { usePageData } from "@vuepress/client"
 const pageData = usePageData()
 
 const { adminInfo } = pageData.value.themeDataPlugin
-console.log(adminInfo)
 </script>
 
 <template>

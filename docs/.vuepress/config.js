@@ -12,7 +12,7 @@ import { gitPlugin } from "@vuepress/plugin-git"
 
 import { copyCodePlugin } from "vuepress-plugin-copy-code2"
 import { readingTimePlugin } from "vuepress-plugin-reading-time2"
-// import { commentPlugin } from "vuepress-plugin-comment2"
+import { blogPlugin } from "vuepress-plugin-blog2";
 import { useThemePlugin } from "./theme/plugin/themePlugin-nesercode"
 
 import tailwindcss from "tailwindcss"
@@ -130,6 +130,56 @@ export default defineUserConfig({
         lang: "zh-CN",
         loading: false,
       },
+    }),
+
+    // Blog plugin
+    blogPlugin({
+      filter: ({ filePathRelative, frontmatter }) => {
+        // 舍弃那些不是从 Markdown 文件生成的页面
+        if (!filePathRelative) return false;
+
+        // 舍弃 `archives` 文件夹的页面
+        if (filePathRelative.startsWith("archives/")) return false;
+
+        // 舍弃那些没有使用默认布局的页面
+        if (frontmatter.home || frontmatter.layout) return false;
+
+        return true;
+      },
+
+      getInfo: ({ excerpt, frontmatter, git = {} }) => {
+        // 获取页面信息
+        const info = {
+          author: frontmatter.author || "",
+          categories: frontmatter.categories || [],
+          date: frontmatter.date || git.createdTime || null,
+          tags: frontmatter.tags || [],
+          excerpt,
+        };
+
+        return info;
+      },
+      category: [
+        {
+          key: "tag",
+          getter: ({ frontmatter }) => frontmatter.tag || [],
+          path: "/tag/",
+          layout: "TagPage",
+          frontmatter: () => ({ title: "标签页" }),
+          itemPath: "/tag/:name/",
+          itemLayout: "404",
+          itemFrontmatter: (name) => ({ title: `${name}标签` }),
+        },
+      ],
+      type: [
+        {
+          key: "star",
+          filter: ({ frontmatter }) => frontmatter.star,
+          path: "/star/",
+          layout: "StarList",
+          frontmatter: () => ({ title: "收藏页" }),
+        },
+      ],
     }),
 
     registerComponentsPlugin({

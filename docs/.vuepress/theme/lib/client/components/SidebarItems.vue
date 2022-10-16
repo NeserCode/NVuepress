@@ -28,28 +28,28 @@ onMounted(() => {
 			const { top: activeSidebarItemTop, height: activeSidebarItemHeight } =
 				activeSidebarItem.getBoundingClientRect()
 
-			let activedItem = sidebarItems.value[0].children.filter(
-				(item) => item.text.trim() === activeSidebarItem.textContent.trim()
-			)
-			if (activedItem.length === 0) {
-				for (let i = 0; i < sidebarItems.value[0].children.length; i++) {
-					for (
-						let j = 0;
-						j < sidebarItems.value[0].children[i].children.length;
-						j++
-					) {
-						if (
-							sidebarItems.value[0].children[i].children[j].text.trim() ===
-							activeSidebarItem.textContent.trim()
-						) {
-							activedItem = sidebarItems.value[0].children[i]
-							break
-						}
-					}
-				}
-			}
+			// let activedItem = sidebarItems.value[0].children.filter(
+			// 	(item) => item.text.trim() === activeSidebarItem.textContent.trim()
+			// )
+			// if (activedItem.length === 0) {
+			// 	for (let i = 0; i < sidebarItems.value[0].children.length; i++) {
+			// 		for (
+			// 			let j = 0;
+			// 			j < sidebarItems.value[0].children[i].children.length;
+			// 			j++
+			// 		) {
+			// 			if (
+			// 				sidebarItems.value[0].children[i].children[j].text.trim() ===
+			// 				activeSidebarItem.textContent.trim()
+			// 			) {
+			// 				activedItem = sidebarItems.value[0].children[i]
+			// 				break
+			// 			}
+			// 		}
+			// 	}
+			// }
 
-			console.log(activedItem)
+			// console.log(activedItem)
 
 			// when the active sidebar item overflows the top edge of sidebar
 			if (activeSidebarItemTop < sidebarTop) {

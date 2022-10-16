@@ -33,7 +33,6 @@
 		"tailwindcss": "^3.1.8",
 		"vuepress": "^2.0.0-beta.51",
 		"vuepress-plugin-blog2": "^2.0.0-beta.110",
-		"vuepress-plugin-comment2": "^2.0.0-beta.110",
 		"vuepress-plugin-copy-code2": "^2.0.0-beta.110",
 		"vuepress-plugin-reading-time2": "^2.0.0-beta.110"
 	},

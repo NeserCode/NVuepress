@@ -35,7 +35,6 @@ const cpdReactions = computed(() => {
 
 onMounted(() => {
 	colorTheme.value = useDarkMode().value ? darkTheme : theme
-	console.log(Giscus)
 })
 </script>
 
