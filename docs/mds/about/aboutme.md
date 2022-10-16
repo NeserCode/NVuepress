@@ -9,7 +9,7 @@ permalink: /about
 
 ## 个人简介
 
-我，你可以称呼我为 **NeserCode** 或者 **Neser** (这已经被刻在导航栏上了)，是一个准程序员。目前在倒腾的技术大部分就是前端了，后端的 Node.js 也有涉猎，但不多。
+我，你可以称呼我为 **NeserCode** 或者 **Neser** (这已经显示在导航栏上了)，是一个准程序员。目前在倒腾的技术大部分就是前端了，后端的 Node.js 也有涉猎，但不多。
 
 我这个人比较慢热，性格上是，做事情也是。由于是处女座，所以决定要做的事情都会很认真的去做，而且有兴趣的事情更能调动我的情绪。但目前比较头疼的是想做的事情有些多，又不擅长规划，于是就会有事事不通事事不顺的现象出现（已经在改 🤦‍♂️）。
 
@@ -19,15 +19,19 @@ permalink: /about
 
 ### 插件
 
-1. vuepress-plugin-reading-time2 ^2.0.0-beta.110
+**1.vuepress-plugin-reading-time2 ^2.0.0-beta.110**
 
 针对该插件提供的数据，自定义开发 reading-time 与 reading-line 组件，协助改进阅读体验。
 
+Docs:
 [zh-CN](https://vuepress-theme-hope.github.io/v2/reading-time/zh/) | [en-US](https://vuepress-theme-hope.github.io/v2/reading-time/)
 
-2. vuepress-plugin-copy-code4 ^2.0.0-beta.110
+**2.vuepress-plugin-copy-code4 ^2.0.0-beta.110**
 
-[zh-CN](https://vuepress-theme-hope.github.io/v2/reading-time/zh/) | [en-US](https://vuepress-theme-hope.github.io/v2/reading-time/)
+为代码块提供 _一键复制_ 的功能，同时适配移动端。
+
+Docs:
+[zh-CN](https://vuepress-theme-hope.github.io/v2/copy-code/zh/) | [en-US](https://vuepress-theme-hope.github.io/v2/copy-code/)
 
 ## 联系方式
 

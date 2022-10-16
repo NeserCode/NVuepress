@@ -31,7 +31,7 @@ console.log(adminInfo)
 	@apply sticky justify-center items-center text-left top-24 flex-col max-h-min;
 }
 .avatarArea {
-	@apply w-36 h-36 overflow-hidden rounded-full text-center;
+	@apply w-36 h-36 overflow-hidden rounded-full text-center my-4;
 }
 .avatarArea img {
 	@apply inline-block w-full h-full;
@@ -40,6 +40,6 @@ console.log(adminInfo)
 	@apply font-thin text-2xl;
 }
 .moto {
-	@apply text-sm my-2 py-2 border-t border-dotted;
+	@apply text-sm my-2 py-2;
 }
 </style>
