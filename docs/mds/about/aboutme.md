@@ -33,6 +33,13 @@ Docs:
 Docs:
 [zh-CN](https://vuepress-theme-hope.github.io/v2/copy-code/zh/) | [en-US](https://vuepress-theme-hope.github.io/v2/copy-code/)
 
+**3.vuepress-plugin-blog2 ^2.0.0-beta.110**
+
+为 Vuepress2 提供 分类标签等数据，是核心组件之一。
+
+Docs:
+[zh-CN](https://vuepress-theme-hope.github.io/v2/blog/zh/) | [en-US](https://vuepress-theme-hope.github.io/v2/blog/)
+
 ## 联系方式
 
 由于是网络页面，这里就不留电话了。留下联系方式仅仅只是为了广交朋友及技术交流，如果没有这方面的意图还请不要添加以下联系方式 :)
