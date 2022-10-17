@@ -8,7 +8,7 @@ import PageReadingLine from "./PageReadingLine.vue"
 import SubSidebar from "./SubSidebar.vue"
 import Comments from "./Comments.vue"
 
-import { ref, toRefs, onMounted, onUnmounted, defineProps } from "vue"
+import { ref, toRefs, onMounted, onUnmounted } from "vue"
 
 const $props = defineProps({
 	isSubsidebar: {
@@ -81,9 +81,11 @@ onUnmounted(() => {
 .page {
 	@apply relative pl-0;
 }
+
 .sidebar-container {
 	@apply absolute inline-flex flex-col h-full top-0 right-0 pt-40;
 }
+
 .sub-sidebar {
 	@apply top-24 right-0;
 }

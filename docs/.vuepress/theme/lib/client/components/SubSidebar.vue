@@ -65,11 +65,11 @@ onMounted(() => {
 })
 </script>
 
-<style lang="postcss" scoped>
+<style lang="postcss">
 .sub-sidebar {
 	@apply sticky inline-flex pr-4 w-56 text-sm transition-all rounded py-2 pb-4 border
-  bg-gray-100 border-gray-300 dark:bg-gray-900 dark:border-gray-700 bg-opacity-80 dark:bg-opacity-30 backdrop-blur
-  overflow-auto overflow-x-hidden;
+	bg-gray-100 border-gray-300 dark:bg-gray-900 dark:border-gray-700
+	bg-opacity-80 dark:bg-opacity-30 backdrop-blur overflow-auto overflow-x-hidden;
 	max-height: calc(100vh - 4rem - 12rem);
 }
 </style>

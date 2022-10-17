@@ -55,12 +55,26 @@ onUnmounted(() => {
 
 <style lang="postcss" scoped>
 .page {
-	@apply relative;
+	@apply relative -ml-24;
 }
 .content-container {
 	@apply text-center;
 }
 .page .theme-default-content {
-	@apply inline-flex text-center max-w-4xl;
+	@apply inline-flex flex-row text-center max-w-4xl;
+}
+
+.sidebar-container {
+	@apply absolute inline-flex flex-col h-full top-0 right-0 pt-40;
+}
+
+.sub-sidebar {
+	@apply top-24 right-0;
+}
+
+@media (max-width: 1150px) {
+	.sidebar-container {
+		@apply hidden;
+	}
 }
 </style>
