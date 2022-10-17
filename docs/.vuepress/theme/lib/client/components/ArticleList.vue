@@ -9,7 +9,6 @@ const $props = defineProps({
 
 <template>
 	<div class="article-wrapper">
-		<div v-if="!items.length">Nothing in here.</div>
 		<article class="article" v-for="{ info, path } in items">
 			<header class="title">
 				<RouterLink :to="path">
@@ -33,7 +32,9 @@ const $props = defineProps({
 
 <style lang="postcss" scoped>
 .article {
-	@apply inline-flex w-full flex-col border py-2 px-4 my-1;
+	@apply inline-flex w-full flex-col py-2 px-4 my-1 rounded border
+  bg-slate-100 dark:bg-slate-700 border-gray-300 dark:border-gray-500
+  transition-all shadow;
 }
 
 .title {

@@ -51,7 +51,7 @@ const shouldShowNavbar = computed(
 	</div>
 </template>
 
-<style lang="postcss">
+<style lang="postcss" scoped>
 .neser-theme-tags-list {
 	@apply inline-flex w-full flex-wrap my-12;
 }

@@ -177,15 +177,7 @@ export default defineUserConfig({
           itemFrontmatter: (name, path) => ({ title: `${name}`, localePath: path }),
         },
       ],
-      type: [
-        {
-          key: "star",
-          filter: ({ frontmatter }) => frontmatter.star,
-          path: "/star/",
-          layout: "StarList",
-          frontmatter: () => ({ title: "收藏页" }),
-        },
-      ],
+      type: [],
     }),
 
     registerComponentsPlugin({
