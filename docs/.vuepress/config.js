@@ -73,6 +73,11 @@ export default defineUserConfig({
             link: "/mds/about/aboutme.md",
             activeMatch: "/about",
           },
+          {
+            text: "Tags",
+            link: "/tag/",
+            activeMatch: "/tag/",
+          },
         ],
         backToHome: "回到首页",
         notFound: [
@@ -147,14 +152,15 @@ export default defineUserConfig({
         return true;
       },
 
-      getInfo: ({ excerpt, frontmatter, git = {} }) => {
+      getInfo: ({ excerpt, frontmatter, git = {}, title }) => {
         // 获取页面信息
         const info = {
           author: frontmatter.author || "",
           categories: frontmatter.categories || [],
           date: frontmatter.date || git.createdTime || null,
-          tags: frontmatter.tags || [],
+          tags: frontmatter.tags || frontmatter.tag || [],
           excerpt,
+          title
         };
 
         return info;
@@ -165,10 +171,10 @@ export default defineUserConfig({
           getter: ({ frontmatter }) => (frontmatter.tag || []),
           path: "/tag/",
           layout: "TagPage",
-          frontmatter: () => ({ title: "标签分类" }),
+          frontmatter: (path) => ({ title: "标签分类", localePath: path }),
           itemPath: "/tag/:name/",
-          itemLayout: "Layout",
-          itemFrontmatter: (name) => ({ title: `🏷 ${name}` }),
+          itemLayout: "TagPage",
+          itemFrontmatter: (name, path) => ({ title: `${name}`, localePath: path }),
         },
       ],
       type: [

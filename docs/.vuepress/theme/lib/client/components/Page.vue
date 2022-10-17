@@ -15,8 +15,12 @@ const $props = defineProps({
 		type: Boolean,
 		default: true,
 	},
+	isComment: {
+		type: Boolean,
+		default: true,
+	},
 })
-const { isSubsidebar } = toRefs($props)
+const { isSubsidebar, isComment } = toRefs($props)
 
 const sidebarContainer = ref(null)
 const mainTextBodyWidth = 660
@@ -66,7 +70,7 @@ onUnmounted(() => {
 
 			<PageNav />
 			<slot name="bottom" />
-			<Comments />
+			<Comments v-if="isComment" />
 			<PageFooter />
 		</div>
 		<div class="sidebar-container" ref="sidebarContainer" v-if="isSubsidebar">
