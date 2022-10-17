@@ -48,7 +48,7 @@ function getComputedExcerpt(item) {
 }
 
 function getComputedRouterLinktoTags(tag) {
-	return `/tag/`
+	return `/tag/${tag}`
 }
 </script>
 
@@ -79,7 +79,7 @@ function getComputedRouterLinktoTags(tag) {
 							:key="tag"
 						>
 							<router-link
-								:to="getComputedRouterLinktoTags()"
+								:to="getComputedRouterLinktoTags(tag)"
 								class="title-wrapper"
 								:title="tag"
 								><span class="innerTitle">{{ tag }}</span>
@@ -129,7 +129,7 @@ function getComputedRouterLinktoTags(tag) {
 }
 .tags .tag {
 	@apply inline-block mx-0.5 pr-1 rounded-l inset-1
-  border border-gray-200 bg-white
+  border border-gray-200 bg-white dark:bg-slate-800 dark:border-gray-600
   text-ellipsis overflow-hidden whitespace-nowrap;
 	max-width: 15ch;
 }
