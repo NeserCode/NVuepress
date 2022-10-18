@@ -7,6 +7,7 @@ import { registerComponentsPlugin } from "@vuepress/plugin-register-components"
 import { shikiPlugin } from "@vuepress/plugin-shiki"
 import { path } from "@vuepress/utils"
 import { searchPlugin } from "@vuepress/plugin-search"
+import { activeHeaderLinksPlugin } from '@vuepress/plugin-active-header-links'
 import { tocPlugin } from "@vuepress/plugin-toc"
 import { gitPlugin } from "@vuepress/plugin-git"
 
@@ -199,6 +200,10 @@ export default defineUserConfig({
       },
     }),
     readingTimePlugin({}),
+    activeHeaderLinksPlugin({
+      offset: 5,
+      delay: 300,
+    })
   ],
   // locales config
   locales: {

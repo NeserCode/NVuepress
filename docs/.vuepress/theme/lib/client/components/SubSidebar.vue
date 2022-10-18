@@ -36,7 +36,7 @@ li {
 
 <style lang="postcss">
 .vuepress-toc-link {
-	@apply text-gray-600;
+	@apply text-gray-600 dark:text-gray-300;
 }
 
 /* Indent */
