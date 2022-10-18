@@ -1,75 +1,94 @@
-<template>
-	<ul v-if="sidebarItems.length" class="sub-sidebar">
-		<SidebarItem
-			v-for="item in sidebarItems"
-			:key="`${item.text}${item.link}`"
-			:item="item"
-		/>
-	</ul>
-</template>
-
 <script setup>
-import SidebarItem from "./SidebarItem.vue"
-import { onMounted, watch, computed } from "vue"
-import { useRoute } from "vue-router"
-import { useSidebarItems } from "../composables"
-
-const route = useRoute()
-const sidebarItems = useSidebarItems()
-
-const computedItemCollapsedClass = computed((item) => {
-	let activeSidebarItem = document.querySelector(
-		`.sidebar a.sidebar-item[href="${route.path}${hash}"]`
-	)
-	if (activeSidebarItem.textContent.trim() === item.text)
-		return "sidebar-item-collapsed"
-	else if (activeSidebarItem.textContent.trim() === item.text) return null
-})
-
-onMounted(() => {
-	watch(
-		() => route.hash,
-		(hash) => {
-			// get the sidebar DOM
-			const sidebar = document.querySelector(".sidebar")
-			if (!sidebar) return
-
-			// get the active sidebar item DOM, whose href equals to the current route
-			const activeSidebarItem = document.querySelector(
-				`.sidebar a.sidebar-item[href="${route.path}${hash}"]`
-			)
-			if (!activeSidebarItem) return
-
-			// get the top and height of the sidebar
-			const { top: sidebarTop, height: sidebarHeight } =
-				sidebar.getBoundingClientRect()
-			// get the top and height of the active sidebar item
-			const { top: activeSidebarItemTop, height: activeSidebarItemHeight } =
-				activeSidebarItem.getBoundingClientRect()
-
-			// when the active sidebar item overflows the top edge of sidebar
-			if (activeSidebarItemTop < sidebarTop) {
-				// scroll to the top edge of sidebar
-				activeSidebarItem.scrollIntoView(true)
-			}
-			// when the active sidebar item overflows the bottom edge of sidebar
-			else if (
-				activeSidebarItemTop + activeSidebarItemHeight >
-				sidebarTop + sidebarHeight
-			) {
-				// scroll to the bottom edge of sidebar
-				activeSidebarItem.scrollIntoView(false)
-			}
-		}
-	)
-})
+const tocOptions = {
+	containerTag: "nav",
+	containerClass: "toc-main",
+	listClass: "vuepress-toc-list",
+	itemClass: "vuepress-toc-item",
+	linkTag: "a",
+	linkClass: "vuepress-toc-link",
+	linkActiveClass: "active",
+	linkChildrenActiveClass: "active",
+}
 </script>
 
-<style lang="postcss">
+<template>
+	<div class="neser-theme-toc sub-sidebar">
+		<Transition mode="out-in">
+			<Toc :options="tocOptions" />
+		</Transition>
+	</div>
+</template>
+
+<style lang="postcss" scoped>
 .sub-sidebar {
-	@apply sticky inline-flex pr-4 w-56 text-sm transition-all rounded py-2 pb-4 border
-	bg-gray-100 border-gray-300 dark:bg-gray-900 dark:border-gray-700
-	bg-opacity-80 dark:bg-opacity-30 backdrop-blur overflow-auto overflow-x-hidden;
+	@apply sticky inline-flex pr-4 w-56 text-sm rounded p-2 border
+	bg-gray-50 border-gray-300 dark:bg-gray-700 dark:border-gray-700
+	bg-opacity-80 dark:bg-opacity-30 backdrop-blur overflow-auto overflow-x-hidden
+	transition-all;
 	max-height: calc(100vh - 4rem - 12rem);
+}
+
+ul,
+li {
+	@apply list-none;
+}
+</style>
+
+<style lang="postcss">
+.vuepress-toc-link {
+	@apply text-gray-600;
+}
+
+/* Indent */
+.vuepress-toc-list {
+	@apply inline-flex flex-col justify-center pl-4
+	text-gray-700;
+}
+.toc-main > .vuepress-toc-list .vuepress-toc-item {
+	@apply inline-flex flex-col;
+}
+.vuepress-toc-list .vuepress-toc-item .vuepress-toc-list .vuepress-toc-item {
+	@apply pl-2;
+}
+
+/* Active */
+.vuepress-toc-link.active {
+	@apply text-blue-400;
+}
+
+.toc-main > .vuepress-toc-list > .vuepress-toc-item > .vuepress-toc-list {
+	@apply hidden;
+}
+
+.toc-main
+	> .vuepress-toc-list:has(.vuepress-toc-list .vuepress-toc-link.active),
+.toc-main
+	> .vuepress-toc-list
+	> .vuepress-toc-item
+	> .vuepress-toc-list:has(.vuepress-toc-link.active),
+.toc-main
+	> .vuepress-toc-list
+	> .vuepress-toc-item:has(.vuepress-toc-link.active)
+	> .vuepress-toc-list {
+	@apply inline-flex;
+}
+
+.toc-main
+	> .vuepress-toc-list
+	> .vuepress-toc-item
+	> .vuepress-toc-list
+	> .vuepress-toc-item
+	.vuepress-toc-link.active::before {
+	@apply relative inline-block w-1 h-3.5 top-0.5 -left-12
+	bg-green-400;
+	content: " ";
+	height: 2ch;
+}
+.toc-main
+	> .vuepress-toc-list
+	> .vuepress-toc-item
+	> .vuepress-toc-list
+	> .vuepress-toc-item
+	.vuepress-toc-link.active {
 }
 </style>
