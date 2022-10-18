@@ -32,7 +32,8 @@ onMounted(() => {
 
 <style lang="postcss" scoped>
 .neser-theme-hitokoto {
-	@apply inline-flex justify-center items-center w-full py-12 my-48;
+	@apply inline-flex justify-center items-center mx-auto px-12 py-8 my-48
+	rounded-md backdrop-blur bg-white bg-opacity-75 dark:bg-gray-800 dark:bg-opacity-75;
 }
 
 .neser-theme-hitokoto .innerText {

@@ -74,7 +74,7 @@ export default defineUserConfig({
             activeMatch: "/about",
           },
           {
-            text: "Tags",
+            text: "Tag",
             link: "/tag/",
             activeMatch: "/tag/",
           },

@@ -94,7 +94,7 @@ function getComputedRouterLinktoTags(tag) {
 
 <style lang="postcss" scoped>
 .neser-theme-article-list {
-	@apply inline-flex  flex-col justify-center w-full px-2 pb-2 mx-auto rounded-2xl lg:px-16 sm:px-0
+	@apply inline-flex  flex-col justify-center w-full px-2 pb-2 mx-auto rounded-2xl
   bg-gray-100 dark:bg-gray-900;
 }
 
@@ -123,9 +123,12 @@ function getComputedRouterLinktoTags(tag) {
 .submitDate {
 	@apply block font-semibold;
 }
+.innerExcerpt {
+	@apply text-gray-400;
+}
 
 .tags {
-	@apply inline-flex flex-wrap justify-end w-full py-1;
+	@apply inline-flex flex-wrap justify-end w-full py-1 my-1;
 }
 .tags .tag {
 	@apply inline-block mx-0.5 pr-1 rounded-l inset-1

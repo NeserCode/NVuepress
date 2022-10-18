@@ -11,3 +11,9 @@ import HomeHitokoto from "./HomeHitokoto.vue"
 		<HomeFooter />
 	</main>
 </template>
+
+<style lang="postcss" scoped>
+.home {
+	@apply flex flex-col justify-center w-full mx-auto;
+}
+</style>
