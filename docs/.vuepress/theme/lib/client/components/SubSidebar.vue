@@ -41,7 +41,7 @@ li {
 
 /* Indent */
 .vuepress-toc-list {
-	@apply inline-flex flex-col justify-center pl-4
+	@apply inline-flex flex-col justify-center pl-2
 	text-gray-700;
 }
 .toc-main > .vuepress-toc-list .vuepress-toc-item {
@@ -52,10 +52,6 @@ li {
 }
 
 /* Active */
-.vuepress-toc-link.active {
-	@apply text-blue-400;
-}
-
 .toc-main > .vuepress-toc-list > .vuepress-toc-item > .vuepress-toc-list {
 	@apply hidden;
 }
@@ -79,16 +75,22 @@ li {
 	> .vuepress-toc-list
 	> .vuepress-toc-item
 	.vuepress-toc-link.active::before {
-	@apply relative inline-block w-1 h-3.5 top-0.5 -left-12
+	@apply relative inline-block w-[3px] h-3.5 top-0.5 -left-8
 	bg-green-400;
 	content: " ";
 	height: 2ch;
 }
+
+.toc-main > .vuepress-toc-list > .vuepress-toc-item .vuepress-toc-link.active {
+	@apply text-blue-400 font-semibold;
+}
+
 .toc-main
 	> .vuepress-toc-list
 	> .vuepress-toc-item
 	> .vuepress-toc-list
 	> .vuepress-toc-item
 	.vuepress-toc-link.active {
+	@apply text-green-400 font-semibold;
 }
 </style>

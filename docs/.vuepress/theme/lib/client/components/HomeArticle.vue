@@ -95,7 +95,7 @@ function getComputedRouterLinktoTags(tag) {
 <style lang="postcss" scoped>
 .neser-theme-article-list {
 	@apply inline-flex  flex-col justify-center w-full px-2 pb-2 mx-auto rounded-2xl
-  bg-gray-100 dark:bg-gray-900;
+  bg-gray-100 dark:bg-gray-900 transition-colors duration-[335ms];
 }
 
 .DBtn {
@@ -103,7 +103,7 @@ function getComputedRouterLinktoTags(tag) {
   text-base font-medium text-purple-900 hover:bg-gray-50
   border border-gray-200 dark:border-gray-700
   bg-white dark:bg-gray-700
-  outline-none;
+  outline-none transition-colors duration-[335ms];
 }
 
 .icon-up {
@@ -117,7 +117,7 @@ function getComputedRouterLinktoTags(tag) {
 .DPanel {
 	@apply px-4 py-2
   text-sm text-gray-500
-  transition-all;
+  transition-all duration-[335ms];
 }
 
 .submitDate {
