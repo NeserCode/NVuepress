@@ -144,4 +144,27 @@ const onBeforeLeave = scrollPromise.pending
 html {
 	@apply scroll-smooth;
 }
+
+.back-to-top {
+	@apply inline-flex justify-center items-center w-8 h-8 bg-transparent;
+}
+
+.back-to-top::before {
+	@apply absolute inline-block w-9 h-9 -top-0.5 -left-0.5 rounded border
+	bg-gray-100 dark:bg-gray-700 border-gray-300 dark:border-gray-500
+	backdrop-blur bg-opacity-60 dark:bg-opacity-60;
+	content: " ";
+}
+.back-to-top::after {
+	@apply absolute inline-flex flex-col items-center justify-end w-8 h-8 pb-0.5
+	text-xs;
+	content: "Top";
+}
+
+.back-to-top__inner {
+	@apply absolute -top-px w-8 h-8
+	bg-slate-500 dark:bg-slate-200;
+	mask-size: 40% 50%;
+	mask-position: 50% 10%;
+}
 </style>

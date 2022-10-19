@@ -1,5 +1,5 @@
 import { activeHeaderLinksPlugin } from '@vuepress/plugin-active-header-links';
-import { backToTopPlugin } from '@vuepress/plugin-back-to-top';
+import { backToTopPlugin } from '../../plugin/plugin-back-to-top';
 import { containerPlugin } from '@vuepress/plugin-container';
 import { externalLinkIconPlugin } from '@vuepress/plugin-external-link-icon';
 import { gitPlugin } from '@vuepress/plugin-git';
@@ -22,9 +22,9 @@ export const defaultTheme = ({ themePlugins = {}, ...localeOptions } = {}) => {
                 .readdirSync(path.resolve(__dirname, '../client/components'))
                 .filter((file) => file.endsWith('.vue'))
                 .map((file) => [
-                `@theme/${file}`,
-                path.resolve(__dirname, '../client/components', file),
-            ])),
+                    `@theme/${file}`,
+                    path.resolve(__dirname, '../client/components', file),
+                ])),
             // workaround for https://github.com/vitejs/vite/issues/7621
             '@vuepress/theme-default/client': path.resolve(__dirname, '../client/index.js'),
         },
