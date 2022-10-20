@@ -1,5 +1,6 @@
 import { activeHeaderLinksPlugin } from '@vuepress/plugin-active-header-links';
 import { backToTopPlugin } from '../../plugin/plugin-back-to-top';
+import { downToCommentPlugin } from '../../plugin/plugin-down-to-comment';
 import { containerPlugin } from '@vuepress/plugin-container';
 import { externalLinkIconPlugin } from '@vuepress/plugin-external-link-icon';
 import { gitPlugin } from '@vuepress/plugin-git';
@@ -47,6 +48,7 @@ export const defaultTheme = ({ themePlugins = {}, ...localeOptions } = {}) => {
                 : [],
             // @vuepress/plugin-back-to-top
             themePlugins.backToTop !== false ? backToTopPlugin() : [],
+            themePlugins.downToComment !== false ? downToCommentPlugin() : [],
             // @vuepress/plugin-container
             themePlugins.container?.tip !== false
                 ? containerPlugin(resolveContainerPluginOptions(localeOptions, 'tip'))

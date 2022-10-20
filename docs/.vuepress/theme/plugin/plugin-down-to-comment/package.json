@@ -1,23 +1,23 @@
 {
-	"name": "@nesercode/vuepress-neser-back-to-top",
+	"name": "@nesercode/vuepress-neser-down-to-comment",
 	"version": "1.0.0",
-	"description": "VuePress2 plugin - back to top",
+	"description": "VuePress2 plugin - down to comment",
 	"keywords": [
 		"vuepress-plugin",
 		"vuepress",
 		"plugin",
-		"top"
+		"comment"
 	],
 	"homepage": "https://github.com/nesercode",
 	"bugs": {
-		"url": "https://github.com/nesercode/vuepress-neser-back-to-top/issues"
+		"url": "https://github.com/nesercode/vuepress-neser-down-to-comment/issues"
 	},
 	"repository": {
 		"type": "git",
-		"url": "git+https://github.com/nesercode/vuepress-neser-back-to-top.git"
+		"url": "git+https://github.com/nesercode/vuepress-neser-down-to-comment.git"
 	},
 	"license": "MIT",
-	"author": "nesercode",
+	"author": "Nesercode",
 	"type": "module",
 	"exports": {
 		".": "./lib/node/index.js",
