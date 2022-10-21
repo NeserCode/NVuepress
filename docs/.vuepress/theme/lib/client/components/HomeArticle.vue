@@ -1,4 +1,5 @@
 <script setup>
+import Pagination from "./Pagination.vue"
 import { acticles as rawActicles } from "../../../../.temp/articles"
 import { onMounted, computed } from "vue"
 import {
@@ -50,6 +51,9 @@ function getComputedExcerpt(item) {
 function getComputedRouterLinktoTags(tag) {
 	return `/tag/${tag}`
 }
+
+function getPrevPage() {}
+function getNextPage() {}
 </script>
 
 <template>
@@ -89,6 +93,7 @@ function getComputedRouterLinktoTags(tag) {
 				</DisclosurePanel>
 			</Transition>
 		</Disclosure>
+		<Pagination :size="5" :total="24" :prev="getPrevPage" :next="getNextPage" />
 	</div>
 </template>
 
