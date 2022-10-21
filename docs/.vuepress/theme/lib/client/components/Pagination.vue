@@ -2,6 +2,10 @@
 import { computed, watch, toRefs, ref } from "vue"
 
 const $props = defineProps({
+	modelValue: {
+		type: Number,
+		default: 1,
+	},
 	prev: {
 		type: Function,
 	},
@@ -11,15 +15,30 @@ const $props = defineProps({
 	total: {
 		type: Number,
 	},
-	current: {
-		type: Number,
-	},
 	size: {
 		type: Number,
 	},
 })
+const { prev, next, total, size, modelValue } = toRefs($props)
+const $emit = defineEmits(["update:modelValue"])
+const currentPage = ref(1)
 
-const { prev, next, total, size } = toRefs($props)
+watch(currentPage, () => {
+	if (modelValue.value === undefined) {
+		currentPage.value = null
+	} else handleChangeInputValue()
+})
+
+watch(modelValue, () => {
+	initModelValue()
+})
+function initModelValue() {
+	currentPage.value = modelValue.value
+}
+function handleChangeInputValue(val) {
+	$emit("update:modelValue", val ?? currentPage.value)
+}
+
 const hasPrev = computed(() => prev.value !== undefined)
 const hasNext = computed(() => next.value !== undefined)
 const zeroTotal = computed(() => total.value === 0)
@@ -27,7 +46,6 @@ const zeroTotal = computed(() => total.value === 0)
 const countPages = computed(() => {
 	return Math.ceil(total.value / size.value)
 })
-const currentPage = ref(1)
 
 watch(currentPage, (val) => {
 	if (val <= 1) currentPage.value = 1

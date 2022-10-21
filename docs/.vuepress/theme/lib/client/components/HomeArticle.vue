@@ -1,7 +1,7 @@
 <script setup>
 import Pagination from "./Pagination.vue"
 import { acticles as rawActicles } from "../../../../.temp/articles"
-import { onMounted, computed, ref } from "vue"
+import { onMounted, computed, ref, watch } from "vue"
 import {
 	Disclosure,
 	DisclosureButton,
@@ -57,6 +57,10 @@ const acticles = computed(() =>
 	useOffset(useActicles(rawActicles), pageOffset.value, pageLimit.value)
 )
 const acticlesLength = computed(() => useActicles(rawActicles).length)
+const currentPage = ref(1)
+watch(currentPage, (val) => {
+	pageOffset.value = (val - 1) * pageLimit.value
+})
 
 onMounted(() => {
 	console.log(acticles)
@@ -112,6 +116,7 @@ function getNextPage() {
 			:total="acticlesLength"
 			:prev="getPrevPage"
 			:next="getNextPage"
+			v-model="currentPage"
 		/>
 	</div>
 </template>
