@@ -109,7 +109,7 @@ function handleNext() {
 	@apply inline-flex items-center;
 }
 .page-input .input-body {
-	@apply w-12 h-6 mx-1 text-center
+	@apply w-12 h-6 mx-1 text-center pl-3.5 focus:pl-0
   text-base border
   text-gray-500 dark:text-gray-300 bg-white dark:bg-slate-800 border-gray-300 dark:border-gray-700
   rounded outline-none focus:ring-2 focus:ring-offset-1
