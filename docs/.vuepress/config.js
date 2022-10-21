@@ -71,7 +71,7 @@ export default defineUserConfig({
         navbar: [
           {
             text: "关于",
-            link: "/mds/about/aboutme.md",
+            link: "/blog/about/aboutme.md",
             activeMatch: "/about",
           },
           {
@@ -146,6 +146,9 @@ export default defineUserConfig({
 
         // 舍弃 `archives` 文件夹的页面
         if (filePathRelative.startsWith("archives/")) return false;
+
+        // 舍弃 `docs` 文件夹的页面
+        if (filePathRelative.startsWith("docs/")) return false;
 
         // 舍弃那些没有使用默认布局的页面
         if (frontmatter.home || frontmatter.layout) return false;

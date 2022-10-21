@@ -1,7 +1,7 @@
 <script setup>
 import Pagination from "./Pagination.vue"
 import { acticles as rawActicles } from "../../../../.temp/articles"
-import { onMounted, computed } from "vue"
+import { onMounted, computed, ref } from "vue"
 import {
 	Disclosure,
 	DisclosureButton,
@@ -18,12 +18,6 @@ function useActicles(items = []) {
 	// 过滤无题页面
 	return items.filter((item) => item.title !== "")
 }
-
-const acticles = useActicles(rawActicles)
-
-onMounted(() => {
-	console.log(acticles)
-})
 
 function getComputedExcerpt(item) {
 	let stringfiedExcerpt = item.excerpt.replace(/<[^>]*>/g, "").replace("# ", "")
@@ -52,8 +46,28 @@ function getComputedRouterLinktoTags(tag) {
 	return `/tag/${tag}`
 }
 
-function getPrevPage() {}
-function getNextPage() {}
+const pageOffset = ref(0),
+	pageLimit = ref(5)
+
+function useOffset(raw = [], offset = 0, limit = 5) {
+	return raw.slice(offset, offset + limit)
+}
+
+const acticles = computed(() =>
+	useOffset(useActicles(rawActicles), pageOffset.value, pageLimit.value)
+)
+const acticlesLength = computed(() => useActicles(rawActicles).length)
+
+onMounted(() => {
+	console.log(acticles)
+})
+
+function getPrevPage() {
+	pageOffset.value -= pageLimit.value
+}
+function getNextPage() {
+	pageOffset.value += pageLimit.value
+}
 </script>
 
 <template>
@@ -93,7 +107,12 @@ function getNextPage() {}
 				</DisclosurePanel>
 			</Transition>
 		</Disclosure>
-		<Pagination :size="5" :total="24" :prev="getPrevPage" :next="getNextPage" />
+		<Pagination
+			:size="pageLimit"
+			:total="acticlesLength"
+			:prev="getPrevPage"
+			:next="getNextPage"
+		/>
 	</div>
 </template>
 

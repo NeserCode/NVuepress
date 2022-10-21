@@ -22,6 +22,7 @@ const $props = defineProps({
 const { prev, next, total, size } = toRefs($props)
 const hasPrev = computed(() => prev.value !== undefined)
 const hasNext = computed(() => next.value !== undefined)
+const zeroTotal = computed(() => total.value === 0)
 
 const countPages = computed(() => {
 	return Math.ceil(total.value / size.value)
@@ -29,8 +30,7 @@ const countPages = computed(() => {
 const currentPage = ref(1)
 
 watch(currentPage, (val) => {
-	if (val >= countPages.value) currentPage.value = countPages.value
-	else if (val <= 1) currentPage.value = 1
+	if (val <= 1) currentPage.value = 1
 	else currentPage.value = val
 })
 
@@ -48,7 +48,7 @@ function handleNext() {
 
 <template>
 	<div class="pagination-main">
-		<div class="pagination-container">
+		<div class="pagination-container" v-show="!zeroTotal">
 			<span class="prev page-fn" v-show="hasPrev" @click="handlePrev"
 				>&lt;</span
 			>
@@ -59,12 +59,14 @@ function handleNext() {
 					name="pagination-input"
 					id="pagination-input"
 					v-model="currentPage"
+					:min="1"
+					:max="countPages"
 				/>
 			</span>
 			<span class="next page-fn" v-show="hasNext" @click="handleNext"
 				>&gt;</span
 			>
-			<span class="page-count"> {{ countPages }} pages</span>
+			<span class="page-count">共 {{ countPages }} 页</span>
 		</div>
 	</div>
 </template>
@@ -75,13 +77,13 @@ function handleNext() {
 }
 
 .pagination-container {
-	@apply inline-flex items-center justify-end w-full p-2;
+	@apply inline-flex items-center justify-end w-full p-2 pb-0;
 }
 
 .pagination-container .page-fn {
-	@apply inline-flex items-center justify-center w-8 h-8 mx-1
+	@apply inline-flex items-center justify-center w-8 h-8 mx-1 pb-1
   text-lg font-semibold leading-3
-  text-gray-500 hover:bg-slate-200 rounded cursor-pointer
+  text-gray-500 hover:bg-slate-200 dark:hover:bg-slate-400 rounded cursor-pointer
   select-none transition-all;
 }
 
@@ -90,10 +92,14 @@ function handleNext() {
 }
 .page-input .input-body {
 	@apply w-12 h-6 mx-1 text-center
-  text-lg font-semibold leading-3
-  text-gray-500 bg-white border border-gray-300
-  rounded focus:outline-none focus:ring-2 focus:ring-offset-1
+  text-base border
+  text-gray-500 dark:text-gray-300 bg-white dark:bg-slate-800 border-gray-300 dark:border-gray-700
+  rounded outline-none focus:ring-2 focus:ring-offset-1
   focus:ring-offset-gray-100 focus:ring-slate-400
-  transition-all appearance-none;
+  transition-all;
+}
+
+.page-count {
+	@apply inline-flex items-center ml-2 text-sm text-gray-500;
 }
 </style>
