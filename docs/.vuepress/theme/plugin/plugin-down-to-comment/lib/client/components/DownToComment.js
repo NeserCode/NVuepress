@@ -1,5 +1,6 @@
 import { debounce } from 'ts-debounce';
-import { computed, defineComponent, h, onMounted, ref, Transition } from 'vue';
+import { computed, watch, defineComponent, h, onMounted, ref, Transition, nextTick } from 'vue';
+import { useRoute } from 'vue-router'
 import { getScrollTop } from '../utils.js';
 import '../styles/vars.css';
 import '../styles/down-to-comment.css';
@@ -11,9 +12,19 @@ export const DownToComment = defineComponent({
         const onScroll = debounce(() => {
             scrollTop.value = getScrollTop();
         }, 100);
+        const hasComment = ref(!(document.querySelector('#comment') === null))
+        const route = useRoute();
+        watch(() => route.path, () => {
+            nextTick(() => {
+                hasComment.value = !(document.querySelector('#comment') === null)
+            })
+        })
         onMounted(() => {
             scrollTop.value = getScrollTop();
             window.addEventListener('scroll', () => onScroll());
+            nextTick(() => {
+                hasComment.value = !(document.querySelector('#comment') === null)
+            })
         });
         const downToCommentEl = h('div', {
             class: 'down-to-comment',
@@ -27,7 +38,7 @@ export const DownToComment = defineComponent({
             name: 'down-to-comment',
             appear: true,
             mode: 'out-in',
-        }, () => (show.value ? downToCommentEl : null));
+        }, () => (show.value && hasComment.value ? downToCommentEl : null));
     },
 });
 export default DownToComment;
