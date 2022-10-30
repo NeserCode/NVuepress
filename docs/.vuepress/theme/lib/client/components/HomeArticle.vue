@@ -1,6 +1,7 @@
 <script setup>
 import Pagination from "./Pagination.vue"
 import { acticles as rawActicles } from "../../../../.temp/articles"
+import { usePageData } from "@vuepress/client"
 import { onMounted, computed, ref, watch } from "vue"
 import {
 	Disclosure,
@@ -10,11 +11,15 @@ import {
 } from "@headlessui/vue"
 import { ChevronUpIcon } from "@heroicons/vue/20/solid"
 
+const page = usePageData()
+
 function useActicles(items = []) {
 	// 过滤首页
 	items = items.filter(
 		(item) => !item.frontmatter.home && !item.frontmatter.about
 	)
+	// 过滤docs目录下的页面
+	items = items.filter((item) => !item.path.startsWith("/docs/"))
 	// 过滤无题页面
 	return items.filter((item) => item.title !== "")
 }
@@ -27,7 +32,7 @@ function getComputedExcerpt(item) {
 		stringfiedExcerpt = stringfiedExcerpt.replace(`${item.title}\n`, "")
 
 	// 删去末尾字符
-	if (stringfiedExcerpt.indexOf(item.title) !== 0)
+	if (stringfiedExcerpt.length >= 15)
 		stringfiedExcerpt = stringfiedExcerpt.substring(
 			0,
 			stringfiedExcerpt.length - 2
@@ -40,6 +45,12 @@ function getComputedExcerpt(item) {
 	stringfiedExcerpt += "......"
 
 	return stringfiedExcerpt
+}
+
+function getComputedDate(item) {
+	return item.date === "0000-00-00"
+		? new Date(page.value.git?.createdTime) ?? "未知"
+		: item.date
 }
 
 function getComputedRouterLinktoTags(tag) {
@@ -75,12 +86,12 @@ function getNextPage() {
 </script>
 
 <template>
-	<div class="neser-theme-article-list">
+	<div class="neser-theme-article-list" v-if="acticles.length">
 		<Disclosure
 			as="div"
 			v-slot="{ open }"
 			class="neser-theme-article-body"
-			v-for="(item, index) in acticles"
+			v-for="item of acticles"
 			:key="item.key"
 		>
 			<DisclosureButton class="DBtn">
@@ -91,7 +102,9 @@ function getNextPage() {
 			</DisclosureButton>
 			<Transition name="fade-slide-y" mode="out-in">
 				<DisclosurePanel class="DPanel">
-					<span class="submitDate" v-if="item.date">{{ item.date }}</span>
+					<span class="submitDate" v-if="item.date">{{
+						getComputedDate(item)
+					}}</span>
 					<span class="innerExcerpt">{{ getComputedExcerpt(item) }}</span>
 					<div class="tags" v-if="item.frontmatter.tag">
 						<span

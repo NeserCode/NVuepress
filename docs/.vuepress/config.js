@@ -53,7 +53,7 @@ export default defineUserConfig({
         },
       }),
 
-  permalinkPattern: ":year/:month/:slug.html",
+  // permalinkPattern: ":year/:month/:slug.html",
   // nesercode theme config
   theme: defaultTheme({
     logo: "https://tenapi.cn/qqimg/?qq=510648363",
@@ -131,7 +131,7 @@ export default defineUserConfig({
         reactions: true,
         metadata: true,
         position: "top",
-        theme: "light", // preferred_color_scheme
+        theme: "light",   // preferred_color_scheme
         darkTheme: "dark_dimmed",
         lang: "zh-CN",
         loading: false,
@@ -156,7 +156,8 @@ export default defineUserConfig({
         return true;
       },
 
-      getInfo: ({ excerpt, frontmatter, git = {}, title }) => {
+      getInfo: (page) => {
+        const { excerpt, frontmatter, git = {}, title } = page
         // 获取页面信息
         const info = {
           author: frontmatter.author || "",
