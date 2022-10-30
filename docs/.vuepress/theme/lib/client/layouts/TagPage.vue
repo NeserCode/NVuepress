@@ -29,7 +29,10 @@ const shouldShowNavbar = computed(
 		<slot name="page">
 			<Page :key="page.path" :isSubsidebar="false" :isComment="false">
 				<template #content-top>
-					<div class="neser-theme-tags-list">
+					<div
+						class="neser-theme-tags-list"
+						v-if="Object.keys(blogCategory.map).length"
+					>
 						<RouterLink
 							v-for="({ items, path }, name) in blogCategory.map"
 							:key="name"
@@ -41,6 +44,9 @@ const shouldShowNavbar = computed(
 								{{ items.length }}
 							</span>
 						</RouterLink>
+					</div>
+					<div class="neser-theme-tags-list" v-else>
+						<span class="no-tags">没有更多的标签</span>
 					</div>
 					<Transition name="fade-slide-y" mode="out-in" appear>
 						<ArticleList :items="blogCategory.currentItems" />
@@ -67,5 +73,9 @@ const shouldShowNavbar = computed(
 }
 .tag.router-link-active {
 	@apply hover:no-underline text-blue-400 border-blue-400;
+}
+
+.no-tags {
+	@apply inline-flex justify-center w-full font-extrabold text-lg mt-12;
 }
 </style>
