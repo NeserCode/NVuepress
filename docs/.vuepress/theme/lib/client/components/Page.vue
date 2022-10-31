@@ -9,6 +9,10 @@ import SubSidebar from "./SubSidebar.vue"
 import Comments from "./Comments.vue"
 
 import { ref, toRefs, onMounted, onUnmounted } from "vue"
+import { usePageData, usePageFrontmatter } from "@vuepress/client"
+
+const page = usePageData()
+const frontmatter = usePageFrontmatter()
 
 const $props = defineProps({
 	isSubsidebar: {
@@ -52,6 +56,15 @@ onMounted(() => {
 onUnmounted(() => {
 	if (isSubsidebar.value) resizeWatcher.disconnect()
 })
+
+function getComputedDate() {
+	console.log(frontmatter.value)
+	return frontmatter.value.date === "0000-00-00"
+		? new Date(page.value.git?.createdTime) ?? "未知"
+		: frontmatter.value.date ??
+				new Date(page.value.git?.createdTime).toLocaleString() ??
+				"未知"
+}
 </script>
 
 <template>
@@ -61,6 +74,7 @@ onUnmounted(() => {
 			<!-- <Toc /> -->
 			<div class="theme-default-content">
 				<slot name="content-top" />
+				<!-- <span class="cpdDate">{{ getComputedDate() }}</span> -->
 				<Content />
 
 				<slot name="content-bottom" />

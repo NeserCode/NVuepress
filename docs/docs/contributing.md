@@ -1,5 +1,7 @@
 ---
 sidebar: auto
+tag:
+  - docs
 ---
 
 # 贡献指南
