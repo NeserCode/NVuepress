@@ -19,8 +19,6 @@ const page = usePageData()
 const frontmatter = usePageFrontmatter<DefaultThemePageFrontmatter>()
 const themeLocale = useThemeLocaleData()
 
-console.log("page", page.value)
-
 // navbar
 const shouldShowNavbar = computed(
 	() => frontmatter.value.navbar !== false && themeLocale.value.navbar !== false
