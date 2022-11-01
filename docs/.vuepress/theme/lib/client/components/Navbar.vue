@@ -75,8 +75,8 @@ function getCssValue(el: HTMLElement | null, property: string): number {
 	</header>
 </template>
 
-<style lang="postcss">
+<style lang="postcss" scoped>
 .navbar {
-	@apply bg-white dark:bg-gray-700 bg-opacity-80 dark:bg-opacity-70 backdrop-blur;
+	@apply bg-white dark:bg-gray-700 bg-opacity-70 dark:bg-opacity-70 backdrop-blur;
 }
 </style>
