@@ -2,7 +2,7 @@
 import Pagination from "./Pagination.vue"
 import { acticles as rawActicles } from "../../../../.temp/articles"
 import { usePageData } from "@vuepress/client"
-import { onMounted, computed, ref, watch } from "vue"
+import { computed, ref, watch } from "vue"
 import {
 	Disclosure,
 	DisclosureButton,
@@ -20,6 +20,8 @@ function useActicles(items = []) {
 	)
 	// 过滤docs目录下的页面
 	items = items.filter((item) => !item.path.startsWith("/docs/"))
+	// 过滤tag下的页面
+	items = items.filter((item) => !item.path.startsWith("/tag/"))
 	// 过滤无题页面
 	return items.filter((item) => item.title !== "")
 }
@@ -71,10 +73,6 @@ const acticlesLength = computed(() => useActicles(rawActicles).length)
 const currentPage = ref(1)
 watch(currentPage, (val) => {
 	pageOffset.value = (val - 1) * pageLimit.value
-})
-
-onMounted(() => {
-	console.log(acticles)
 })
 
 function getPrevPage() {

@@ -58,15 +58,12 @@ onUnmounted(() => {
 })
 
 function getComputedDate() {
-	console.log(frontmatter.value)
 	return frontmatter.value.date === "0000-00-00"
 		? new Date(page.value.git?.createdTime) ?? "未知"
 		: frontmatter.value.date ??
 				new Date(page.value.git?.createdTime).toLocaleString() ??
 				"未知"
 }
-
-console.log(frontmatter.value, page.value)
 </script>
 
 <template>
