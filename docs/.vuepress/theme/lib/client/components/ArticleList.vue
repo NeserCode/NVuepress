@@ -1,15 +1,39 @@
 <script setup>
+import { computed, toRefs, ref } from "vue"
+import Pagination from "../components/Pagination.vue"
 const $props = defineProps({
 	items: {
 		type: Array,
 		default: () => [],
 	},
 })
+const { items } = toRefs($props)
+
+const pageLimit = ref(5)
+const currentPage = ref(1)
+const acticlesLength = computed(() => items.value.length)
+
+function getPrevPage() {
+	if (currentPage.value === 1) return false
+	currentPage.value--
+}
+function getNextPage() {
+	if (currentPage.value === Math.ceil(acticlesLength.value / pageLimit.value))
+		return false
+	currentPage.value++
+}
+
+const paginatedItems = computed(() => {
+	return items.value.slice(
+		(currentPage.value - 1) * pageLimit.value,
+		currentPage.value * pageLimit.value
+	)
+})
 </script>
 
 <template>
 	<div class="article-wrapper">
-		<article class="article" v-for="{ info, path } in items">
+		<article class="article" v-for="{ info, path } in paginatedItems">
 			<header class="title">
 				<RouterLink :to="path">
 					{{ info.title }}
@@ -27,6 +51,13 @@ const $props = defineProps({
 				>
 			</div>
 		</article>
+		<Pagination
+			:size="pageLimit"
+			:total="acticlesLength"
+			:prev="getPrevPage"
+			:next="getNextPage"
+			v-model="currentPage"
+		/>
 	</div>
 </template>
 
