@@ -8,7 +8,7 @@ import PageReadingLine from "./PageReadingLine.vue"
 import SubSidebar from "./SubSidebar.vue"
 import Comments from "./Comments.vue"
 
-import { ref, toRefs, onMounted, onUnmounted } from "vue"
+import { ref, toRefs, onMounted, onUnmounted, computed } from "vue"
 import { usePageData, usePageFrontmatter } from "@vuepress/client"
 
 const page = usePageData()
@@ -64,6 +64,10 @@ function getComputedDate() {
 				new Date(page.value.git?.createdTime).toLocaleString() ??
 				"未知"
 }
+
+const isShowArticleHeader = computed(() => {
+	return page.value.path.startsWith("/blog/")
+})
 </script>
 
 <template>
@@ -73,7 +77,9 @@ function getComputedDate() {
 			<div class="theme-default-content">
 				<div class="content-header">
 					<h1 class="md-title" :title="page.title">{{ page.title }}</h1>
-					<span class="cpdDate">{{ getComputedDate() }}</span>
+					<span class="cpdDate" v-if="isShowArticleHeader">{{
+						getComputedDate()
+					}}</span>
 					<span class="tags">
 						<span
 							v-for="tag of frontmatter.tag"
