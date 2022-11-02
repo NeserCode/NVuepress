@@ -179,7 +179,7 @@ export default defineUserConfig({
           frontmatter: (path) => ({ title: "标签分类", localePath: path }),
           itemPath: "/tag/:name/",
           itemLayout: "TagPage",
-          itemFrontmatter: (name, path) => ({ title: `${name}`, localePath: path }),
+          itemFrontmatter: (name, path) => ({ title: `${name} 标签`, localePath: path }),
         },
       ],
       type: [],

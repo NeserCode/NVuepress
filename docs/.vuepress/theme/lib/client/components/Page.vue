@@ -128,7 +128,7 @@ console.log(frontmatter.value, page.value)
 	@apply pb-0;
 }
 .content-header .cpdDate {
-	@apply inline-flex justify-center items-center py-0.5 mr-1 my-1 px-2 rounded border-2
+	@apply inline-flex justify-center items-center py-0.5 mr-1 my-1 px-2 rounded border-2 text-sm
 	bg-slate-100 dark:bg-slate-700
 	border-slate-200 dark:border-slate-600
 	text-gray-600 dark:text-gray-400
