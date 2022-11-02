@@ -41,7 +41,7 @@ function handleChangeInputValue(val) {
 
 const hasPrev = computed(() => prev.value !== undefined)
 const hasNext = computed(() => next.value !== undefined)
-const zeroTotal = computed(() => total.value === 0)
+const zeroTotal = computed(() => total.value / size.value <= 1)
 
 const countPages = computed(() => {
 	return Math.ceil(total.value / size.value)
