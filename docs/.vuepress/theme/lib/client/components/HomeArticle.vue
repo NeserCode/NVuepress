@@ -54,7 +54,7 @@ function getComputedDate(item) {
 }
 
 function getComputedRouterLinktoTags(tag) {
-	return `/tag/${tag}`
+	return `/tag/${tag}/`
 }
 
 const pageOffset = ref(0),

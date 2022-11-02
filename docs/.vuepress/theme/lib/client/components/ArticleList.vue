@@ -29,6 +29,12 @@ const paginatedItems = computed(() => {
 		currentPage.value * pageLimit.value
 	)
 })
+
+console.log(
+	items.value,
+	(currentPage.value - 1) * pageLimit.value,
+	currentPage.value * pageLimit.value
+)
 </script>
 
 <template>

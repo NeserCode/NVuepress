@@ -10,7 +10,7 @@ import { useThemeLocaleData } from "../composables"
 import { useBlogCategory } from "vuepress-plugin-blog2/client"
 
 const page = usePageData()
-const blogCategory = useBlogCategory("tag")
+const blogCategory = useBlogCategory()
 const frontmatter = usePageFrontmatter<DefaultThemePageFrontmatter>()
 const themeLocale = useThemeLocaleData()
 
