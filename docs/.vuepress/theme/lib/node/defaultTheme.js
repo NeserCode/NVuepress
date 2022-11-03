@@ -9,6 +9,11 @@ import { nprogressPlugin } from '@vuepress/plugin-nprogress';
 import { palettePlugin } from '@vuepress/plugin-palette';
 import { prismjsPlugin } from '@vuepress/plugin-prismjs';
 import { blogPlugin } from "vuepress-plugin-blog2";
+import { searchPlugin } from "@vuepress/plugin-search"
+import { tocPlugin } from "@vuepress/plugin-toc"
+import { copyCodePlugin } from "vuepress-plugin-copy-code2"
+import { readingTimePlugin } from "vuepress-plugin-reading-time2"
+import { registerComponentsPlugin } from "@vuepress/plugin-register-components"
 import { themeDataPlugin } from '@vuepress/plugin-theme-data';
 import { fs, getDirname, path } from '@vuepress/utils';
 import { assignDefaultLocaleOptions, resolveContainerPluginOptions, } from './utils/index.js';
@@ -36,6 +41,7 @@ export const defaultTheme = ({ themePlugins = {}, ...localeOptions } = {}) => {
             page.data.filePathRelative = page.filePathRelative;
             // save title into route meta to generate navbar and sidebar
             page.routeMeta.title = page.title;
+            page.routeMeta.date = page.data.git?.createdTime ?? page.date;
         },
         plugins: [
             // @vuepress/plugin-active-header-link
@@ -45,6 +51,7 @@ export const defaultTheme = ({ themePlugins = {}, ...localeOptions } = {}) => {
                     headerAnchorSelector: '.header-anchor',
                     // should greater than page transition duration
                     delay: 300,
+                    offset: 5,
                 })
                 : [],
             // @vuepress/plugin-back-to-top
@@ -95,7 +102,7 @@ export const defaultTheme = ({ themePlugins = {}, ...localeOptions } = {}) => {
             // @vuepress/plugin-git
             themePlugins.git !== false
                 ? gitPlugin({
-                    createdTime: false,
+                    createdTime: true,
                     updatedTime: localeOptions.lastUpdated !== false,
                     contributors: localeOptions.contributors !== false,
                 })
@@ -134,12 +141,13 @@ export const defaultTheme = ({ themePlugins = {}, ...localeOptions } = {}) => {
                     },
 
                     getInfo: (page) => {
-                        const { excerpt, frontmatter, git = {}, title } = page
+                        const { excerpt, git = {}, frontmatter, title } = page
+
                         // 获取页面信息
                         const info = {
                             author: frontmatter.author || "",
                             categories: frontmatter.categories || [],
-                            date: frontmatter.date || git.createdTime || null,
+                            date: frontmatter.date || git?.createdTime || null,
                             tags: frontmatter.tags || frontmatter.tag || [],
                             excerpt,
                             title
@@ -159,10 +167,34 @@ export const defaultTheme = ({ themePlugins = {}, ...localeOptions } = {}) => {
                             itemFrontmatter: (name, path) => ({ title: `${name} 标签`, localePath: path }),
                         },
                     ],
-                    type: [],
+                    type: [
+                        {
+                            key: "timeLine",
+                            filter: (page) => page.data.path.startsWith("/blog/"),
+                            sorter: (pageA, pageB) => new Date(pageB.frontmatter.date).getTime() - new Date(pageA.frontmatter.date).getTime(),
+                            path: "/timeLine/",
+                            layout: "TimeLine",
+                            frontmatter: (path) => ({ title: "TimeLine", localePath: path }),
+                        }
+                    ],
                 }) : [],
             // @vuepress/plugin-theme-data
             themeDataPlugin({ themeData: localeOptions }),
+            searchPlugin(),
+            tocPlugin(),
+            copyCodePlugin({
+                showInMobile: true,
+                locales: {
+                    "/": {
+                        hint: "复制这份代码",
+                        copy: "已复制 ",
+                    },
+                },
+            }),
+            readingTimePlugin({}),
+            registerComponentsPlugin({
+                componentsDir: path.resolve(__dirname, "./components"),
+            }),
         ],
     };
 };

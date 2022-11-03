@@ -3,16 +3,9 @@ import { defaultTheme } from "./theme";
 import { viteBundler } from "@vuepress/bundler-vite"
 import { webpackBundler } from "@vuepress/bundler-webpack"
 import { defineUserConfig } from "@vuepress/cli"
-import { registerComponentsPlugin } from "@vuepress/plugin-register-components"
 import { shikiPlugin } from "@vuepress/plugin-shiki"
-import { path } from "@vuepress/utils"
-import { searchPlugin } from "@vuepress/plugin-search"
-import { activeHeaderLinksPlugin } from '@vuepress/plugin-active-header-links'
-import { tocPlugin } from "@vuepress/plugin-toc"
-import { gitPlugin } from "@vuepress/plugin-git"
 
-import { copyCodePlugin } from "vuepress-plugin-copy-code2"
-import { readingTimePlugin } from "vuepress-plugin-reading-time2"
+
 import { useThemePlugin } from "./theme/plugin/themePlugin-nesercode"
 
 import tailwindcss from "tailwindcss"
@@ -72,6 +65,11 @@ export default defineUserConfig({
             text: "关于",
             link: "/blog/about/aboutme.md",
             activeMatch: "/about",
+          },
+          {
+            text: "TimeLine",
+            link: "/timeLine/",
+            activeMatch: "/timeLine/",
           },
           {
             text: "Tag",
@@ -137,29 +135,8 @@ export default defineUserConfig({
       },
     }),
 
-    registerComponentsPlugin({
-      componentsDir: path.resolve(__dirname, "./components"),
-    }),
     // only enable shiki plugin in production mode
     isProd ? shikiPlugin({ theme: "dark-plus" }) : [],
-    searchPlugin(),
-    tocPlugin(),
-    gitPlugin(),
-
-    copyCodePlugin({
-      showInMobile: true,
-      locales: {
-        "/": {
-          hint: "复制这份代码",
-          copy: "已复制 ",
-        },
-      },
-    }),
-    readingTimePlugin({}),
-    activeHeaderLinksPlugin({
-      offset: 5,
-      delay: 300,
-    })
   ],
   // locales config
   locales: {

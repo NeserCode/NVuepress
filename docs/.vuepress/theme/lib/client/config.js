@@ -5,6 +5,7 @@ import { setupDarkMode, setupSidebarItems, useScrollPromise, } from './composabl
 import Layout from './layouts/Layout.vue';
 import NotFound from './layouts/404.vue';
 import TagPage from './layouts/TagPage.vue';
+import TimeLine from './layouts/TimeLine.vue';
 import './styles/index.scss';
 export default defineClientConfig({
     enhance({ app, router }) {
@@ -42,5 +43,6 @@ export default defineClientConfig({
         Layout,
         NotFound,
         TagPage,
+        TimeLine,
     },
 });
