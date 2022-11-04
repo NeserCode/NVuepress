@@ -1,4 +1,4 @@
-import { defaultTheme } from "./theme";
+import { nesercodeTheme } from "./theme";
 
 import { viteBundler } from "@vuepress/bundler-vite"
 import { webpackBundler } from "@vuepress/bundler-webpack"
@@ -47,13 +47,13 @@ export default defineUserConfig({
 
   // permalinkPattern: ":year/:month/:slug.html",
   // nesercode theme config
-  theme: defaultTheme({
+  theme: nesercodeTheme({
     logo: "https://tenapi.cn/qqimg/?qq=510648363",
     repo: "NeserCode/NeserCode.github.io",
     docsDir: "docs",
     lastUpdatedText: "更新于",
     contributorsText: "由",
-    editLink: false,
+    editLink: true,
     sidebarDepth: 2,
 
     // locales config
