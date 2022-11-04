@@ -29,10 +29,26 @@ console.log(blogType.value)
 
 		<slot name="page">
 			<Page :key="page.path" :isSubsidebar="false" :isComment="false">
-				<template #content-top> </template>
+				<template #content-top>
+					<div class="time-line-container">
+						<span class="time-node">
+							<div class="article">a article</div>
+						</span>
+					</div>
+				</template>
 			</Page>
 		</slot>
 	</div>
 </template>
 
-<style lang="postcss" scoped></style>
+<style lang="postcss" scoped>
+.time-line-container {
+	@apply relative inline-flex w-full min-h-screen;
+}
+.time-line-container::after {
+	@apply inline-block absolute w-1 h-full left-1/2 top-0 rounded-sm
+	bg-slate-500
+	-translate-x-1/2;
+	content: " ";
+}
+</style>

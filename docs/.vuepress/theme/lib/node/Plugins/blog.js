@@ -50,7 +50,11 @@ export const getBlogPlugin = () => blogPlugin({
       sorter: (pageA, pageB) => new Date(pageB.data.git?.createdTime).getTime() - new Date(pageA.data.git?.createdTime).getTime(),
       path: "/timeLine/",
       layout: "TimeLine",
-      frontmatter: (path) => ({ title: "TimeLine", localePath: path }),
+      frontmatter: (path) => ({
+        title: "TimeLine",
+        localePath: path,
+        readingLine: false
+      }),
     }
   ],
 })

@@ -30,39 +30,41 @@ const sidebarContainer = ref(null)
 const mainTextBodyWidth = 660
 const sideOffset = 60
 
-const resizeWatcher = isSubsidebar.value
-	? new ResizeObserver((element) => {
-			let containerWidth = Math.floor(
-				Number(
-					window
-						.getComputedStyle(sidebarContainer.value)
-						.width.replace("px", "")
+const resizeWatcher = computed(() =>
+	isSubsidebar.value
+		? new ResizeObserver((element) => {
+				let containerWidth = Math.floor(
+					Number(
+						window
+							.getComputedStyle(sidebarContainer.value)
+							.width.replace("px", "")
+					)
 				)
-			)
-			let screenWidth = element[0].contentRect.width
+				let screenWidth = element[0].contentRect.width
 
-			let computedRightMargin =
-				(screenWidth - mainTextBodyWidth) / 2 -
-				sideOffset -
-				(containerWidth === NaN ? 0 : containerWidth)
+				let computedRightMargin =
+					(screenWidth - mainTextBodyWidth) / 2 -
+					sideOffset -
+					(containerWidth === NaN ? 0 : containerWidth)
 
-			sidebarContainer.value.style.right = `${computedRightMargin}px`
-	  })
-	: null
+				sidebarContainer.value.style.right = `${computedRightMargin}px`
+		  })
+		: null
+)
 
 onMounted(() => {
-	if (isSubsidebar.value) resizeWatcher.observe(document.body)
+	resizeWatcher.value?.observe(document.body)
 })
 onUnmounted(() => {
-	if (isSubsidebar.value) resizeWatcher.disconnect()
+	resizeWatcher.value?.disconnect()
 })
 
 function getComputedDate() {
-	return frontmatter.value.date === "0000-00-00"
-		? new Date(page.value.git?.createdTime) ?? "未知"
-		: frontmatter.value.date ??
+	return frontmatter.value.date === "0000-00-00" || !frontmatter.value.date
+		? new Date(page.value.git?.createdTime).toLocaleString() ?? "时间长河中某处"
+		: new Date(frontmatter.value.date).toLocaleString() ??
 				new Date(page.value.git?.createdTime).toLocaleString() ??
-				"未知"
+				"时间长河中某处"
 }
 
 const isShowArticleHeader = computed(() => {
