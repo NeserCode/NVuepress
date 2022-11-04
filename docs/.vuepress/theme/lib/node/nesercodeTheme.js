@@ -20,10 +20,16 @@ import {
     getExternalLinkIconPlugin,
     getMediumZoomPlugin
 } from './Plugins'
+import { useGitPlugin } from './utils/plugin'
 
 const __dirname = getDirname(import.meta.url);
-export const nesercodeTheme = ({ themePlugins = {}, ...localeOptions } = {}) => {
+export const nesercodeTheme = ({ themePlugins = {}, ...localeOptions } = {}) => (app) => {
     assignDefaultLocaleOptions(localeOptions);
+    useGitPlugin(app, {
+        createdTime: true,
+        updatedTime: localeOptions.lastUpdated !== false,
+        contributors: localeOptions.contributors !== false,
+    })
     return {
         name: '@vuepress/theme-default',
         templateBuild: path.resolve(__dirname, '../../templates/build.html'),
@@ -89,14 +95,6 @@ export const nesercodeTheme = ({ themePlugins = {}, ...localeOptions } = {}) => 
             // @vuepress/plugin-external-link-icon
             themePlugins.externalLinkIcon !== false
                 ? getExternalLinkIconPlugin(localeOptions)
-                : [],
-            // @vuepress/plugin-git
-            themePlugins.git !== false
-                ? gitPlugin({
-                    createdTime: true,
-                    updatedTime: localeOptions.lastUpdated !== false,
-                    contributors: localeOptions.contributors !== false,
-                })
                 : [],
             // @vuepress/plugin-medium-zoom
             themePlugins.mediumZoom !== false

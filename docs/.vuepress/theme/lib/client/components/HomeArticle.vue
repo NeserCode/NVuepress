@@ -82,7 +82,7 @@ function getNextPage() {
 	pageOffset.value += pageLimit.value
 }
 
-console.log(acticles.value)
+console.log(acticles.value, page.value)
 </script>
 
 <template>

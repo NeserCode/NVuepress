@@ -18,13 +18,12 @@ export const getBlogPlugin = () => blogPlugin({
   },
 
   getInfo: (page) => {
-    const { excerpt, git = {}, frontmatter, title } = page
-
+    const { excerpt, frontmatter, title } = page
     // 获取页面信息
     const info = {
       author: frontmatter.author || "",
       categories: frontmatter.categories || [],
-      date: frontmatter.date || git?.createdTime || null,
+      date: frontmatter.date ? new Date(frontmatter.date) : new Date(page.data.git?.createdTime),
       tags: frontmatter.tags || frontmatter.tag || [],
       excerpt,
       title
@@ -48,7 +47,7 @@ export const getBlogPlugin = () => blogPlugin({
     {
       key: "timeLine",
       filter: (page) => page.data.path.startsWith("/blog/"),
-      sorter: (pageA, pageB) => new Date(pageB.frontmatter.date).getTime() - new Date(pageA.frontmatter.date).getTime(),
+      sorter: (pageA, pageB) => new Date(pageB.data.git?.createdTime).getTime() - new Date(pageA.data.git?.createdTime).getTime(),
       path: "/timeLine/",
       layout: "TimeLine",
       frontmatter: (path) => ({ title: "TimeLine", localePath: path }),
