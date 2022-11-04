@@ -22,6 +22,8 @@ function useActicles(items = []) {
 	items = items.filter((item) => !item.path.startsWith("/docs/"))
 	// 过滤tag下的页面
 	items = items.filter((item) => !item.path.startsWith("/tag/"))
+	// 过滤timeline下的页面
+	items = items.filter((item) => !item.path.startsWith("/timeline/"))
 	// 过滤无题页面
 	return items.filter((item) => item.title !== "")
 }
@@ -52,7 +54,7 @@ function getComputedExcerpt(item) {
 function getComputedDate(item) {
 	return item.date === "0000-00-00"
 		? new Date(page.value.git?.createdTime) ?? "未知"
-		: item.date
+		: new Date(item.date)
 }
 
 function getComputedRouterLinktoTags(tag) {
