@@ -19,7 +19,9 @@ const shouldShowNavbar = computed(
 )
 
 const articles = computed(() => {
-	return blogType.value.items.sort((a, b) => b.info.date - a.info.date)
+	return blogType.value.items.sort(
+		(a, b) => new Date(b.info.date).getTime() - new Date(a.info.date).getTime()
+	)
 })
 
 function getComputedExcerpt(item) {
