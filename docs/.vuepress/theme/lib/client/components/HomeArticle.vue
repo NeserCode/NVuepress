@@ -2,7 +2,7 @@
 import Pagination from "./Pagination.vue"
 import { acticles as rawActicles } from "../../../../.temp/articles"
 import { usePageData } from "@vuepress/client"
-import { computed, ref, watch } from "vue"
+import { computed, ref, watch, onMounted } from "vue"
 import {
 	Disclosure,
 	DisclosureButton,
@@ -10,6 +10,7 @@ import {
 	TransitionRoot,
 } from "@headlessui/vue"
 import { ChevronUpIcon } from "@heroicons/vue/20/solid"
+import CoolHue from "../styles/coolhue.json"
 
 const page = usePageData()
 
@@ -83,6 +84,26 @@ function getPrevPage() {
 function getNextPage() {
 	pageOffset.value += pageLimit.value
 }
+
+// function that get one random of the array
+function getRandomHue() {
+	let randomHue = CoolHue[Math.floor(Math.random() * CoolHue.length)]
+	let randomDeg = Math.floor((Math.random() * 360) / 5) * 5
+	let randomSaturation = Math.floor((Math.random() * 100) / 5) * 5
+	return `linear-gradient(${randomDeg}deg, ${randomHue[0]} ${randomSaturation}%, ${randomHue[1]} 100%)`
+}
+
+// function that set background color
+function setRandomHueBgColor() {
+	document.documentElement.style.setProperty(
+		"--random-hue-color",
+		getRandomHue()
+	)
+}
+
+onMounted(() => {
+	setRandomHueBgColor()
+})
 </script>
 
 <template>
@@ -143,9 +164,18 @@ function getNextPage() {
 .DBtn {
 	@apply flex w-full justify-between rounded-lg p-2 mt-2
   text-base font-medium text-purple-900 hover:bg-gray-50
-  border border-gray-200 dark:border-gray-700
-  bg-white dark:bg-gray-700
+  bg-slate-200 dark:bg-slate-700 border border-gray-200 dark:border-gray-700
   outline-none transition-colors duration-[335ms];
+}
+
+.DBtn .innerTitle {
+	background: var(--random-hue-color);
+	@apply bg-clip-text text-transparent
+	transition-colors;
+}
+
+.DBtn:hover .innerTitle {
+	@apply bg-clip-text text-green-400;
 }
 
 .icon-up {
@@ -158,7 +188,7 @@ function getNextPage() {
 
 .DPanel {
 	@apply px-4 py-2
-  text-sm text-gray-500
+  text-sm text-gray-400
   transition-all duration-[335ms];
 }
 
@@ -173,7 +203,7 @@ function getNextPage() {
 	@apply inline-flex flex-wrap justify-end w-full py-1 my-1;
 }
 .tags .tag {
-	@apply inline-block mx-0.5 pr-1 rounded-l inset-1
+	@apply inline-block m-0.5 pr-1 rounded-l inset-1
   border border-gray-200 bg-white dark:bg-slate-800 dark:border-gray-600
   text-ellipsis overflow-hidden whitespace-nowrap;
 	max-width: 15ch;
