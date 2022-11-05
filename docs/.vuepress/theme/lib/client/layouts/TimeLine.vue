@@ -49,6 +49,19 @@ function getComputedExcerpt(item) {
 	return stringfiedExcerpt
 }
 
+function getEarliestAndLatestDate() {
+	let earliestDate = new Date(articles.value[0].info.date)
+	let latestDate = new Date(articles.value[0].info.date)
+
+	for (let i = 1; i < articles.value.length; i++) {
+		let date = new Date(articles.value[i].info.date)
+		if (date < earliestDate) earliestDate = date
+		if (date > latestDate) latestDate = date
+	}
+
+	return [earliestDate.toLocaleString(), latestDate.toLocaleString()]
+}
+
 console.log(articles.value)
 </script>
 
@@ -60,7 +73,14 @@ console.log(articles.value)
 
 		<slot name="page">
 			<Page :key="page.path" :isSubsidebar="false" :isComment="false">
-				<template #content-top>
+				<template #content-header-addon>
+					<span class="time-area"
+						>{{ getEarliestAndLatestDate()[0] }} ~
+						{{ getEarliestAndLatestDate()[1] }}</span
+					>
+					<span class="total-area"> 共 {{ articles.length }} 篇 </span>
+				</template>
+				<template #content-bottom>
 					<div class="time-node-wrapper">
 						<div
 							class="time-line-container"
@@ -119,7 +139,7 @@ console.log(articles.value)
 .time-node .article {
 	@apply relative inline-flex flex-col w-full p-4 border-2 rounded-md
 	border-slate-400 dark:border-slate-600
-	hover:ring-2 dark:hover:ring-slate-600 hover:ring-yellow-200 dark:hover:bg-gray-700 hover:bg-green-200
+	hover:ring-2 dark:hover:ring-slate-600 hover:ring-yellow-200 dark:hover:bg-gray-700 hover:bg-green-100
 	transition-all;
 }
 
@@ -146,7 +166,7 @@ console.log(articles.value)
 .time-node-wrapper .time-line-container:nth-child(even) .time-node::before {
 	@apply absolute top-1/2 left-0 w-4 h-4
 	border-2 border-slate-400
-	bg-slate-400 dark:bg-slate-600
+	bg-slate-100 dark:bg-slate-600
 	rounded-full -translate-x-[9px] -translate-y-1/2;
 	content: " ";
 }
@@ -154,8 +174,14 @@ console.log(articles.value)
 .time-node-wrapper .time-line-container:nth-child(odd) .time-node::before {
 	@apply absolute top-1/2 right-0 w-4 h-4
 	border-2 border-slate-400
-	bg-slate-400 dark:bg-slate-600
+	bg-slate-100 dark:bg-slate-600
 	rounded-full translate-x-[9px] -translate-y-1/2;
 	content: " ";
+}
+
+.time-area,
+.total-area {
+	@apply inline-block text-sm font-semibold mr-4
+	text-gray-500;
 }
 </style>

@@ -82,6 +82,7 @@ const isShowArticleHeader = computed(() => {
 					<span class="cpdDate" v-if="isShowArticleHeader">{{
 						getComputedDate()
 					}}</span>
+					<slot name="content-header-addon" />
 					<span class="tags">
 						<span
 							v-for="tag of frontmatter.tag"

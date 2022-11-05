@@ -55,6 +55,8 @@ export default defineUserConfig({
     contributorsText: "由",
     editLink: true,
     sidebarDepth: 2,
+    // change repo text
+    repoLabel: "源",
 
     // locales config
     locales: {
@@ -67,12 +69,12 @@ export default defineUserConfig({
             activeMatch: "/about",
           },
           {
-            text: "TimeLine",
+            text: "时",
             link: "/timeLine/",
             activeMatch: "/timeLine/",
           },
           {
-            text: "Tag",
+            text: "类",
             link: "/tag/",
             activeMatch: "/tag/",
           },
