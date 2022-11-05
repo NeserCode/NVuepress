@@ -1,12 +1,18 @@
 <script setup lang="ts">
 import Navbar from "@theme/Navbar.vue"
 import Page from "@theme/Page.vue"
+import Sidebar from "@theme/Sidebar.vue"
 
-import { computed } from "vue"
+import { computed, onMounted, onUnmounted, ref } from "vue"
 import { usePageData, usePageFrontmatter } from "@vuepress/client"
 import type { DefaultThemePageFrontmatter } from "../../shared"
-import { useThemeLocaleData } from "../composables"
+import {
+	useScrollPromise,
+	useSidebarItems,
+	useThemeLocaleData,
+} from "../composables"
 import { useBlogType } from "vuepress-plugin-blog2/client"
+import { useRouter } from "vue-router"
 
 const page = usePageData()
 const blogType = useBlogType()
@@ -62,49 +68,125 @@ function getEarliestAndLatestDate() {
 	return [earliestDate.toLocaleString(), latestDate.toLocaleString()]
 }
 
-console.log(articles.value)
+// sidebar
+const sidebarItems = useSidebarItems()
+const isSidebarOpen = ref(false)
+const toggleSidebar = (to?: boolean): void => {
+	isSidebarOpen.value = typeof to === "boolean" ? to : !isSidebarOpen.value
+}
+const touchStart = { x: 0, y: 0 }
+const onTouchStart = (e): void => {
+	touchStart.x = e.changedTouches[0].clientX
+	touchStart.y = e.changedTouches[0].clientY
+}
+const onTouchEnd = (e): void => {
+	const dx = e.changedTouches[0].clientX - touchStart.x
+	const dy = e.changedTouches[0].clientY - touchStart.y
+	if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 40) {
+		if (dx > 0 && touchStart.x <= 80) {
+			toggleSidebar(true)
+		} else {
+			toggleSidebar(false)
+		}
+	}
+}
+
+// classes
+const containerClass = computed(() => [
+	{
+		"no-navbar": !shouldShowNavbar.value,
+		"no-sidebar":
+			page.value.themeDataPlugin.subSidebar ?? !sidebarItems.value.length,
+		"sidebar-open": isSidebarOpen.value,
+	},
+	frontmatter.value.pageClass,
+])
+
+// close sidebar after navigation
+let unregisterRouterHook
+onMounted(() => {
+	const router = useRouter()
+	unregisterRouterHook = router.afterEach(() => {
+		toggleSidebar(false)
+	})
+})
+onUnmounted(() => {
+	unregisterRouterHook()
+})
+
+// handle scrollBehavior with transition
+const scrollPromise = useScrollPromise()
+const onBeforeEnter = scrollPromise.resolve
+const onBeforeLeave = scrollPromise.pending
 </script>
 
 <template>
-	<div class="theme-tag-view-container">
+	<div
+		class="theme-time-view-container theme-container"
+		:class="containerClass"
+		@touchstart="onTouchStart"
+		@touchend="onTouchEnd"
+	>
 		<slot name="navbar">
-			<Navbar v-if="shouldShowNavbar" />
+			<Navbar v-if="shouldShowNavbar" @toggle-sidebar="toggleSidebar" />
 		</slot>
 
-		<slot name="page">
-			<Page :key="page.path" :isComment="false">
-				<template #content-header-addon>
-					<span class="time-area"
-						>{{ getEarliestAndLatestDate()[0] }} ~
-						{{ getEarliestAndLatestDate()[1] }}</span
-					>
-					<span class="total-area"> 共 {{ articles.length }} 篇 </span>
+		<div class="sidebar-mask" @click="toggleSidebar(false)" />
+
+		<slot name="sidebar">
+			<Sidebar class="lg:inline-block xl:hidden">
+				<template #top>
+					<slot name="sidebar-top" />
 				</template>
-				<template #content-bottom>
-					<div class="time-node-wrapper">
-						<div
-							class="time-line-container"
-							v-for="article of articles"
-							key="article.path"
-						>
-							<span class="time-node">
-								<div class="article">
-									<span class="title"
-										><router-link :to="article.path">{{
-											article.info.title
-										}}</router-link></span
-									>
-									<span class="date">{{
-										new Date(article.info.date).toLocaleString()
-									}}</span>
-									<span class="excerpt">{{ getComputedExcerpt(article) }}</span>
-								</div>
-							</span>
-						</div>
-					</div>
+				<template #bottom>
+					<slot name="sidebar-bottom" />
 				</template>
-			</Page>
+			</Sidebar>
 		</slot>
+
+		<Transition
+			name="fade-slide-y"
+			mode="out-in"
+			@before-enter="onBeforeEnter"
+			@before-leave="onBeforeLeave"
+		>
+			<slot name="page">
+				<Page :key="page.path" :isComment="false">
+					<template #content-header-addon>
+						<span class="time-area"
+							>{{ getEarliestAndLatestDate()[0] }} ~
+							{{ getEarliestAndLatestDate()[1] }}</span
+						>
+						<span class="total-area"> 共 {{ articles.length }} 篇 </span>
+					</template>
+					<template #content-bottom>
+						<div class="time-node-wrapper">
+							<div
+								class="time-line-container"
+								v-for="article of articles"
+								key="article.path"
+							>
+								<span class="time-node">
+									<div class="article">
+										<span class="title"
+											><router-link :to="article.path">{{
+												article.info.title
+											}}</router-link></span
+										>
+										<span class="date">{{
+											new Date(article.info.date).toLocaleString()
+										}}</span>
+										<span class="excerpt">{{
+											getComputedExcerpt(article)
+										}}</span>
+									</div>
+								</span>
+							</div>
+						</div>
+					</template>
+				</Page>
+			</slot>
+		</Transition>
 	</div>
 </template>
 
@@ -114,12 +196,12 @@ console.log(articles.value)
 	box-content;
 }
 .time-node-wrapper .time-line-container:nth-child(even) {
-	@apply self-end border-x-2 
+	@apply self-end border-x-2 pr-0
 	-translate-x-px items-end
 	border-transparent border-l-slate-400;
 }
 .time-node-wrapper .time-line-container:nth-child(odd) {
-	@apply self-start border-x-2 
+	@apply self-start border-x-2 pl-0
 	translate-x-px
 	border-transparent border-r-slate-400;
 }
@@ -134,7 +216,7 @@ console.log(articles.value)
 	@apply self-start;
 }
 .time-node {
-	@apply inline-block overflow-hidden p-4;
+	@apply inline-block overflow-hidden py-4 px-1;
 }
 .time-node .article {
 	@apply relative inline-flex flex-col w-full p-4 border-2 rounded-md
