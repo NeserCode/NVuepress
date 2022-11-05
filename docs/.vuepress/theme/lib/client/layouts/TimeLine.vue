@@ -72,7 +72,7 @@ console.log(articles.value)
 		</slot>
 
 		<slot name="page">
-			<Page :key="page.path" :isSubsidebar="false" :isComment="false">
+			<Page :key="page.path" :isComment="false">
 				<template #content-header-addon>
 					<span class="time-area"
 						>{{ getEarliestAndLatestDate()[0] }} ~
