@@ -115,8 +115,8 @@ export const nesercodeTheme = ({ themePlugins = {}, ...localeOptions } = {}) => 
                 showInMobile: true,
                 locales: {
                     "/": {
-                        hint: "复制这份代码",
-                        copy: "已复制 ",
+                        hint: "已复制",
+                        copy: "复制这份代码",
                     },
                 },
             }),

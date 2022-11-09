@@ -55,7 +55,7 @@ onUnmounted(() => {
 
 <style lang="postcss" scoped>
 .page {
-	@apply relative -ml-24;
+	@apply relative -ml-36;
 }
 .content-container {
 	@apply text-center;
@@ -73,6 +73,9 @@ onUnmounted(() => {
 }
 
 @media (max-width: 1150px) {
+	.page {
+		@apply -ml-0;
+	}
 	.sidebar-container {
 		@apply hidden;
 	}

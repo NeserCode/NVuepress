@@ -10,7 +10,6 @@ import {
 	TransitionRoot,
 } from "@headlessui/vue"
 import { ChevronUpIcon } from "@heroicons/vue/20/solid"
-import CoolHue from "../styles/coolhue.json"
 
 const page = usePageData()
 
@@ -54,8 +53,8 @@ function getComputedExcerpt(item) {
 
 function getComputedDate(item) {
 	return item.date === "0000-00-00"
-		? new Date(page.value.git?.createdTime) ?? "未知"
-		: new Date(item.date)
+		? new Date(page.value.git?.createdTime).toLocaleString() ?? "时间长河某处"
+		: new Date(item.date).toLocaleString()
 }
 
 function getComputedRouterLinktoTags(tag) {
@@ -84,26 +83,6 @@ function getPrevPage() {
 function getNextPage() {
 	pageOffset.value += pageLimit.value
 }
-
-// function that get one random of the array
-function getRandomHue() {
-	let randomHue = CoolHue[Math.floor(Math.random() * CoolHue.length)]
-	let randomDeg = Math.floor((Math.random() * 360) / 5) * 5
-	let randomSaturation = Math.floor((Math.random() * 100) / 5) * 5
-	return `linear-gradient(${randomDeg}deg, ${randomHue[0]} ${randomSaturation}%, ${randomHue[1]} 100%)`
-}
-
-// function that set background color
-function setRandomHueBgColor() {
-	document.documentElement.style.setProperty(
-		"--random-hue-color",
-		getRandomHue()
-	)
-}
-
-onMounted(() => {
-	setRandomHueBgColor()
-})
 </script>
 
 <template>
@@ -166,12 +145,6 @@ onMounted(() => {
   text-base font-medium text-purple-900 hover:bg-gray-50
   bg-slate-200 dark:bg-slate-700 border border-gray-200 dark:border-gray-700
   outline-none transition-colors duration-[335ms];
-}
-
-.DBtn .innerTitle {
-	background: var(--random-hue-color);
-	@apply bg-clip-text text-transparent
-	transition-colors;
 }
 
 .DBtn:hover .innerTitle {

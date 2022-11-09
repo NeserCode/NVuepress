@@ -151,7 +151,7 @@ const onBeforeLeave = scrollPromise.pending
 			@before-leave="onBeforeLeave"
 		>
 			<slot name="page">
-				<Page :key="page.path" :isComment="false">
+				<Page :key="page.path" :isComment="false" :isSubsidebar="false">
 					<template #content-header-addon>
 						<span class="time-area"
 							>{{ getEarliestAndLatestDate()[0] }} ~
