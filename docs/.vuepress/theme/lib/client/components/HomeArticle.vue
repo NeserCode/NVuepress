@@ -98,6 +98,7 @@ function getNextPage() {
 				<router-link :to="item.path" class="title-wrapper" title="阅读文章"
 					><span class="innerTitle">{{ item.title }}</span>
 				</router-link>
+				<span class="isUpon">{{ item.upon ?? "置顶" }}</span>
 				<ChevronUpIcon :class="open ? 'open' : ''" class="icon-up" />
 			</DisclosureButton>
 			<Transition name="fade-slide-y" mode="out-in">
