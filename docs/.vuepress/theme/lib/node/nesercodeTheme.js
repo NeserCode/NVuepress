@@ -18,6 +18,7 @@ import {
     getDownToCommentPlugin,
     getExternalLinkIconPlugin,
     getMediumZoomPlugin,
+    getMdEnhancePlugin,
     getSearchPlugin,
 } from './Plugins'
 import { useGitPlugin } from './utils/plugin'
@@ -109,6 +110,7 @@ export const nesercodeTheme = ({ themePlugins = {}, ...localeOptions } = {}) => 
             themePlugins.blog !== false ? getBlogPlugin() : [],
             // @vuepress/plugin-theme-data
             themeDataPlugin({ themeData: localeOptions }),
+            getMdEnhancePlugin,
             getSearchPlugin,
             tocPlugin(),
             copyCodePlugin({
