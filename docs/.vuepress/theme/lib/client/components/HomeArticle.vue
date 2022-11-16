@@ -157,6 +157,11 @@ function getNextPage() {
 	@apply bg-clip-text text-green-400;
 }
 
+.isPinned {
+	@apply inline-block px-1 font-semibold
+	text-red-400;
+}
+
 .icon-up {
 	@apply h-5 w-5 text-blue-300
   transition-all;
