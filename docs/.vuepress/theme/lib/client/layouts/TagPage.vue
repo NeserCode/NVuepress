@@ -109,6 +109,14 @@ const onBeforeLeave = scrollPromise.pending
 		>
 			<slot name="page">
 				<Page :key="page.path" :isSubsidebar="false" :isComment="false">
+					<template #content-header-addon>
+						<span class="total"
+							>共 {{ Object.keys(blogCategory.map).length }} 类</span
+						>
+						<span class="sum-count" v-if="blogCategory.currentItems">
+							此类共 {{ blogCategory.currentItems.length }} 篇
+						</span>
+					</template>
 					<template #content-top>
 						<div
 							class="neser-theme-tags-list"
@@ -142,6 +150,12 @@ const onBeforeLeave = scrollPromise.pending
 <style lang="postcss" scoped>
 .neser-theme-tags-list {
 	@apply inline-flex w-full flex-wrap my-12;
+}
+
+.total,
+.sum-count {
+	@apply inline-block text-sm font-semibold mr-4
+	text-gray-500;
 }
 
 .tag {
