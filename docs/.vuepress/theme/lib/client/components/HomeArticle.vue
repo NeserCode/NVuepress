@@ -149,7 +149,7 @@ function getNextPage() {
 .DBtn {
 	@apply inline-flex w-full justify-between rounded-lg p-2 mt-2
   text-base font-medium text-purple-900 hover:bg-gray-50
-  bg-slate-200 dark:bg-slate-700 border border-gray-200 dark:border-gray-700
+  bg-white dark:bg-slate-700 border border-gray-200 dark:border-gray-700
   outline-none transition-colors duration-[335ms];
 }
 
@@ -158,8 +158,8 @@ function getNextPage() {
 }
 
 .isPinned {
-	@apply inline-block px-1 font-semibold
-	text-red-400;
+	@apply inline-block px-1 mr-1 font-semibold rounded
+	text-slate-400 bg-black bg-opacity-10 dark:bg-opacity-30;
 }
 
 .icon-up {
