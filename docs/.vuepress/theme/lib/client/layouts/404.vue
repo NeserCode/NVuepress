@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script lang="ts" setup>
 import { useRouteLocale } from "@vuepress/client"
 import { useThemeLocaleData } from "../composables"
 

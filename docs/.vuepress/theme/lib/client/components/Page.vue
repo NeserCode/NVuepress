@@ -82,8 +82,14 @@ const isShowArticleHeader = computed(() => {
 					<span class="cpdDate" v-if="isShowArticleHeader">{{
 						getComputedDate()
 					}}</span>
+
 					<slot name="content-header-addon" />
 					<span class="tags">
+						<span
+							class="isPinned"
+							v-if="frontmatter.isPinned ?? frontmatter.pinned"
+							>置顶</span
+						>
 						<span
 							v-for="tag of frontmatter.tag"
 							:key="tag"
@@ -100,7 +106,7 @@ const isShowArticleHeader = computed(() => {
 
 			<PageMeta />
 
-			<!-- <PageNav /> -->
+			<PageNav />
 			<slot name="bottom" />
 			<Comments v-if="isComment" />
 			<PageFooter />
@@ -134,11 +140,13 @@ const isShowArticleHeader = computed(() => {
 	@apply pb-0;
 }
 .content-header .cpdDate {
-	@apply inline-flex justify-center items-center py-0.5 mr-1 my-1 px-2 rounded border-2 text-sm
-	bg-slate-100 dark:bg-slate-700
-	border-slate-200 dark:border-slate-600
+	@apply inline-flex justify-center items-center py-0.5 mr-1 my-1 px-2 text-sm
 	text-gray-600 dark:text-gray-400
 	select-none;
+}
+
+.content-header .tags {
+	@apply block;
 }
 
 .content-header .tags span {

@@ -1,7 +1,7 @@
 <script setup>
 import Pagination from "./Pagination.vue"
 import { acticles as rawActicles } from "../../../../.temp/articles"
-import { usePageData } from "@vuepress/client"
+import { usePageData, usePageFrontmatter } from "@vuepress/client"
 import { computed, ref, watch, onMounted } from "vue"
 import {
 	Disclosure,
@@ -12,6 +12,7 @@ import {
 import { ChevronUpIcon } from "@heroicons/vue/20/solid"
 
 const page = usePageData()
+const frontmatter = usePageFrontmatter()
 
 function useActicles(items = []) {
 	// 过滤首页
@@ -95,10 +96,14 @@ function getNextPage() {
 			:key="item.key"
 		>
 			<DisclosureButton class="DBtn">
-				<router-link :to="item.path" class="title-wrapper" title="阅读文章"
-					><span class="innerTitle">{{ item.title }}</span>
+				<router-link :to="item.path" class="title-wrapper" title="阅读文章">
+					<span
+						class="isPinned"
+						v-if="item.frontmatter.isPinned ?? item.frontmatter.pinned"
+						>置顶</span
+					>
+					<span class="innerTitle">{{ item.title }}</span>
 				</router-link>
-				<span class="isUpon">{{ item.upon ?? "置顶" }}</span>
 				<ChevronUpIcon :class="open ? 'open' : ''" class="icon-up" />
 			</DisclosureButton>
 			<Transition name="fade-slide-y" mode="out-in">
@@ -142,7 +147,7 @@ function getNextPage() {
 }
 
 .DBtn {
-	@apply flex w-full justify-between rounded-lg p-2 mt-2
+	@apply inline-flex w-full justify-between rounded-lg p-2 mt-2
   text-base font-medium text-purple-900 hover:bg-gray-50
   bg-slate-200 dark:bg-slate-700 border border-gray-200 dark:border-gray-700
   outline-none transition-colors duration-[335ms];
