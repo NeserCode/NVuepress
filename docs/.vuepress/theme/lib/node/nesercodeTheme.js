@@ -2,7 +2,6 @@ import { gitPlugin } from '@vuepress/plugin-git';
 import { nprogressPlugin } from '@vuepress/plugin-nprogress';
 import { palettePlugin } from '@vuepress/plugin-palette';
 import { prismjsPlugin } from '@vuepress/plugin-prismjs';
-import { searchPlugin } from "@vuepress/plugin-search"
 import { tocPlugin } from "@vuepress/plugin-toc"
 import { copyCodePlugin } from "vuepress-plugin-copy-code2"
 import { readingTimePlugin } from "vuepress-plugin-reading-time2"
@@ -18,7 +17,8 @@ import {
     getContainerPlugin,
     getDownToCommentPlugin,
     getExternalLinkIconPlugin,
-    getMediumZoomPlugin
+    getMediumZoomPlugin,
+    getSearchPlugin,
 } from './Plugins'
 import { useGitPlugin } from './utils/plugin'
 
@@ -109,7 +109,7 @@ export const nesercodeTheme = ({ themePlugins = {}, ...localeOptions } = {}) => 
             themePlugins.blog !== false ? getBlogPlugin() : [],
             // @vuepress/plugin-theme-data
             themeDataPlugin({ themeData: localeOptions }),
-            searchPlugin(),
+            getSearchPlugin,
             tocPlugin(),
             copyCodePlugin({
                 showInMobile: true,
