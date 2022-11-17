@@ -38,7 +38,7 @@
     @apply my-2;
   }
   ul,ol,li{
-    @apply list-disc;
+    list-style: revert;
   }
   ul,ol{
     @apply pl-6;
