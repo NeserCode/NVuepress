@@ -1,5 +1,7 @@
 import type { GitPluginPageData } from "@vuepress/plugin-git"
 import type { NavLink, SidebarConfig } from "./nav.js"
+// import type { themeData } from '../../plugin/themePlugin-nesercode/lib/share'
+
 export interface DefaultThemePageData extends GitPluginPageData {
 	filePathRelative: string | null
 }
@@ -38,6 +40,7 @@ export interface DefaultThemeNormalPageFrontmatter
 	contributors?: boolean
 	sidebar?: "auto" | false | SidebarConfig
 	sidebarDepth?: number
+	tag: string[]
 	prev?: string | NavLink
 	next?: string | NavLink
 }

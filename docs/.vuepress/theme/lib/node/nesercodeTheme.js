@@ -1,4 +1,3 @@
-import { gitPlugin } from '@vuepress/plugin-git';
 import { nprogressPlugin } from '@vuepress/plugin-nprogress';
 import { palettePlugin } from '@vuepress/plugin-palette';
 import { prismjsPlugin } from '@vuepress/plugin-prismjs';
