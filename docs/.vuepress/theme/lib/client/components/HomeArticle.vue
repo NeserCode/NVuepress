@@ -94,7 +94,7 @@ function getNextPage() {
 			class="neser-theme-article-body"
 			v-for="item of acticles"
 			:key="item.key"
-			data-headlessui-state="open"
+			:defaultOpen="true"
 		>
 			<DisclosureButton class="DBtn" data-headlessui-state="open">
 				<router-link :to="item.path" class="title-wrapper" title="阅读文章">
