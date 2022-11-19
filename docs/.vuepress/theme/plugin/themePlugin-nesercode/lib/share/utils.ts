@@ -1,5 +1,9 @@
-import { useThemePluginOptions } from "../node"
+import type { useThemePluginOptions } from "../node"
 import defaultThemeOptions from "./defaultThemeOptions"
+
+function assign(a: any, b: any) {
+	return Object.assign(a, b)
+}
 
 export function generateThemeOptions(
 	options: useThemePluginOptions | null
@@ -15,11 +19,14 @@ export function generateThemeOptions(
 		giscusOptions,
 	} = options
 	return {
-		footer: footer ?? defaultThemeOptions.footer,
-		adminInfo: adminInfo ?? defaultThemeOptions.adminInfo,
-		subSidebar: subSidebar ?? defaultThemeOptions.subSidebar,
-		readingTime: readingTime ?? defaultThemeOptions.readingTime,
-		readingLine: readingLine ?? defaultThemeOptions.readingLine,
-		giscusOptions: giscusOptions ?? defaultThemeOptions.giscusOptions,
+		footer: assign(defaultThemeOptions.footer, footer ?? {}),
+		adminInfo: assign(defaultThemeOptions.adminInfo, adminInfo ?? {}),
+		subSidebar: !!subSidebar,
+		readingTime: !!readingTime,
+		readingLine: !!readingLine,
+		giscusOptions: assign(
+			defaultThemeOptions.giscusOptions,
+			giscusOptions ?? {}
+		),
 	}
 }

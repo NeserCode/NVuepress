@@ -1,6 +1,7 @@
 const defaultThemeOptions = {
 	footer: {
 		display: false,
+		themeInfoDisplay: true,
 	},
 	adminInfo: {
 		avatar: false,
@@ -12,7 +13,6 @@ const defaultThemeOptions = {
 	readingTime: false,
 	readingLine: false,
 	giscusOptions: {
-		src: "",
 		repo: ``,
 		repoId: "",
 		category: "",

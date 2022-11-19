@@ -106,10 +106,10 @@ export default defineUserConfig({
     useThemePlugin({
       footer: {
         display: true,
-        year: "2021-2022",
-        copyright:
-          "NeserCode - <a target='_blank' href='https://github.com/NeserCode'>Github</a>",
-        themeInfoDisplay: true,
+        // year: "2021-2022",
+        // copyright:
+        //   "NeserCode - <a target='_blank' href='https://github.com/NeserCode'>Github</a>",
+        // themeInfoDisplay: true,
       },
       adminInfo: {
         display: true,

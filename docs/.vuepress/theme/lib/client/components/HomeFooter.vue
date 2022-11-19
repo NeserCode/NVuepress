@@ -15,8 +15,6 @@ const footerHtml = computed(
 
 const { year, copyright, themeInfoDisplay } =
 	pageData.value.themeDataPlugin.footer
-
-console.log(pageData.value)
 </script>
 
 <template>
@@ -24,8 +22,8 @@ console.log(pageData.value)
 		<div v-if="footerHtml" v-html="footerHtml" />
 		<div v-else class="neser-footer-body">
 			<span class="normal-info">
-				<span class="year">© {{ year }}</span>
-				<span class="copyright" v-html="copyright"></span>
+				<span class="year" v-if="year">© {{ year }}</span>
+				<span class="copyright" v-if="copyright" v-html="copyright"></span>
 			</span>
 			<span class="theme-info" v-if="themeInfoDisplay">
 				Theme By NeserCode | Power By VuePress v2
@@ -44,11 +42,11 @@ console.log(pageData.value)
 }
 
 .neser-footer-body {
-	@apply inline-flex flex-col justify-center items-center;
+	@apply inline-flex flex-col justify-center items-center border-t border-gray-600;
 }
 
 .normal-info {
-	@apply inline-flex items-center px-2 pt-1.5 relative border-t border-gray-600;
+	@apply inline-flex items-center px-2 pt-1.5 relative;
 }
 .normal-info::after {
 	content: " ";
