@@ -5,11 +5,7 @@ import Sidebar from "@theme/Sidebar.vue"
 import { computed, onMounted, onUnmounted, ref } from "vue"
 import { usePageData, usePageFrontmatter } from "@vuepress/client"
 import type { DefaultThemePageFrontmatter } from "../../shared"
-import {
-	useScrollPromise,
-	useSidebarItems,
-	useThemeLocaleData,
-} from "../composables"
+import { useSidebarItems, useThemeLocaleData } from "../composables"
 import { useRouter } from "vue-router"
 
 const page = usePageData()
@@ -65,11 +61,6 @@ onMounted(() => {
 onUnmounted(() => {
 	unregisterRouterHook()
 })
-
-// handle scrollBehavior with transition
-const scrollPromise = useScrollPromise()
-const onBeforeEnter = scrollPromise.resolve
-const onBeforeLeave = scrollPromise.pending
 </script>
 
 <template>
@@ -96,13 +87,6 @@ const onBeforeLeave = scrollPromise.pending
 			</Sidebar>
 		</slot>
 
-		<Transition
-			name="fade-slide-y"
-			mode="out-in"
-			@before-enter="onBeforeEnter"
-			@before-leave="onBeforeLeave"
-		>
-			<slot name="page"> </slot>
-		</Transition>
+		<slot name="page"> </slot>
 	</div>
 </template>
