@@ -2,7 +2,7 @@
 import Giscus from "@giscus/vue"
 import PageMeta from "./PageMeta.vue"
 import PageNav from "./PageNav.vue"
-import PageFooter from "./PageFooter.vue"
+import ThemeFooter from "./ThemeFooter.vue"
 import PageReadingTime from "./PageReadingTime.vue"
 import PageReadingLine from "./PageReadingLine.vue"
 import SubSidebar from "./SubSidebar.vue"
@@ -109,7 +109,7 @@ const isShowArticleHeader = computed(() => {
 			<PageNav />
 			<slot name="bottom" />
 			<Comments v-if="isComment" />
-			<PageFooter />
+			<ThemeFooter />
 		</div>
 		<div class="sidebar-container" ref="sidebarContainer" v-if="isSubsidebar">
 			<page-reading-time />

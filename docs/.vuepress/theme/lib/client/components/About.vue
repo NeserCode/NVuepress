@@ -2,7 +2,7 @@
 import AboutSidebar from "./AboutSidebar.vue"
 import AboutMain from "./AboutMain.vue"
 import SubSidebar from "./SubSidebar.vue"
-import PageFooter from "./PageFooter.vue"
+import ThemeFooter from "./ThemeFooter.vue"
 import PageReadingTime from "./PageReadingTime.vue"
 
 import { ref, onMounted, onUnmounted } from "vue"
@@ -44,7 +44,7 @@ onUnmounted(() => {
 					<Content />
 				</about-main>
 			</div>
-			<PageFooter />
+			<ThemeFooter />
 		</div>
 		<div class="sidebar-container" ref="sidebarContainer">
 			<page-reading-time />

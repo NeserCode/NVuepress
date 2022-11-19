@@ -62,6 +62,7 @@ html {
 	@apply scroll-smooth;
 }
 
+/* up and down plugins */
 .back-to-top,
 .down-to-comment {
 	@apply inline-flex justify-center items-center w-8 h-8 bg-transparent
@@ -105,5 +106,10 @@ html {
 }
 .down-to-comment__link {
 	@apply absolute inline-block top-0 w-8 h-8 z-10;
+}
+
+/* copy-code 2 */
+body #message-container .message {
+	@apply inline-flex justify-center items-center;
 }
 </style>

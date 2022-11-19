@@ -114,10 +114,11 @@ export const nesercodeTheme = ({ themePlugins = {}, ...localeOptions } = {}) => 
             tocPlugin(),
             copyCodePlugin({
                 showInMobile: true,
+                duration: 1200,
                 locales: {
                     "/": {
                         hint: "已复制",
-                        copy: "复制这份代码",
+                        copy: "复制代码",
                     },
                 },
             }),

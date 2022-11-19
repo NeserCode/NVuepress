@@ -1,6 +1,6 @@
 <script setup>
 import HomeContent from "./HomeContent.vue"
-import HomeFooter from "./HomeFooter.vue"
+import ThemeFooter from "./ThemeFooter.vue"
 import HomeHitokoto from "./HomeHitokoto.vue"
 </script>
 
@@ -8,7 +8,7 @@ import HomeHitokoto from "./HomeHitokoto.vue"
 	<main class="home">
 		<HomeHitokoto />
 		<HomeContent />
-		<HomeFooter />
+		<ThemeFooter />
 	</main>
 </template>
 

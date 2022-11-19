@@ -18,7 +18,7 @@ const { year, copyright, themeInfoDisplay } =
 </script>
 
 <template>
-	<footer class="neser-footer-home" v-if="footerDisplay">
+	<footer class="neser-footer" v-if="footerDisplay">
 		<div v-if="footerHtml" v-html="footerHtml" />
 		<div v-else class="neser-footer-body">
 			<span class="normal-info">
@@ -37,7 +37,7 @@ const { year, copyright, themeInfoDisplay } =
 	@apply underline;
 }
 
-.neser-footer-home {
+.neser-footer {
 	@apply inline-flex w-full h-full justify-center items-center my-8;
 }
 
