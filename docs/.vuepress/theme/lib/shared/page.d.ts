@@ -44,3 +44,10 @@ export interface DefaultThemeNormalPageFrontmatter
 	prev?: string | NavLink
 	next?: string | NavLink
 }
+
+export interface PageHeader {
+	level: number
+	title: string
+	slug: string
+	children: PageHeader[]
+}

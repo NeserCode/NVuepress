@@ -23,6 +23,10 @@ const $props = defineProps({
 		type: Boolean,
 		default: true,
 	},
+	isReadingTime: {
+		type: Boolean,
+		default: true,
+	},
 })
 const { isSubsidebar, isComment } = toRefs($props)
 
@@ -111,9 +115,13 @@ const isShowArticleHeader = computed(() => {
 			<Comments v-if="isComment" />
 			<ThemeFooter />
 		</div>
-		<div class="sidebar-container" ref="sidebarContainer" v-if="isSubsidebar">
-			<page-reading-time />
-			<sub-sidebar />
+		<div
+			class="sidebar-container"
+			ref="sidebarContainer"
+			v-if="isReadingTime || isSubsidebar"
+		>
+			<page-reading-time v-if="isReadingTime" />
+			<sub-sidebar v-if="isSubsidebar" />
 		</div>
 		<page-reading-line />
 	</main>
@@ -122,14 +130,6 @@ const isShowArticleHeader = computed(() => {
 <style lang="postcss" scoped>
 .page {
 	@apply relative pl-0;
-}
-
-.sidebar-container {
-	@apply absolute inline-flex flex-col h-full top-0 right-0 pt-40;
-}
-
-.sub-sidebar {
-	@apply top-24 right-0;
 }
 
 /* Content fix */
@@ -165,5 +165,11 @@ const isShowArticleHeader = computed(() => {
 	.sidebar-container {
 		@apply hidden;
 	}
+}
+</style>
+
+<style lang="postcss">
+.sidebar-container {
+	@apply absolute inline-flex flex-col h-full top-0 right-0 pt-40;
 }
 </style>

@@ -52,12 +52,78 @@ function getEarliestAndLatestDate() {
 
 	return [earliestDate.toLocaleString(), latestDate.toLocaleString()]
 }
+
+interface YearAndMonthObject {
+	year: number
+	month: number
+}
+interface YearAndMonthObjectwithIndex extends YearAndMonthObject {
+	index: number
+}
+type YearAndMonthArray = YearAndMonthObject[]
+
+// function get each year and month among the articles, admit repeat
+function getYearAndMonthArray(): YearAndMonthArray {
+	let yearAndMonthArray: YearAndMonthArray = []
+
+	for (let i = 0; i < articles.value.length; i++) {
+		let date = new Date(articles.value[i].info.date)
+		yearAndMonthArray.push({
+			year: date.getFullYear(),
+			month: date.getMonth() + 1,
+		})
+	}
+
+	return yearAndMonthArray
+}
+
+// function get the first node in getYearAndMonthArray() that in each month, including the article index
+
+function getFirstNodeInEachMonth(): YearAndMonthObjectwithIndex[] {
+	let yearAndMonthArray = getYearAndMonthArray()
+	let firstNodeInEachMonth: YearAndMonthObjectwithIndex[] = []
+
+	for (let i = 0; i < yearAndMonthArray.length; i++) {
+		if (
+			yearAndMonthArray[i].year !== yearAndMonthArray[i - 1]?.year ||
+			yearAndMonthArray[i].month !== yearAndMonthArray[i - 1]?.month
+		) {
+			firstNodeInEachMonth.push({
+				year: yearAndMonthArray[i].year,
+				month: yearAndMonthArray[i].month,
+				index: i,
+			})
+		}
+	}
+
+	return firstNodeInEachMonth
+}
+
+// function get the anchor text in v-for for each article, arroding getFirstNodeInEachMonth()
+function getAnchorText(index: number): string {
+	let firstNodeInEachMonth = getFirstNodeInEachMonth()
+	let anchorText = ""
+
+	for (let i = 0; i < firstNodeInEachMonth.length; i++) {
+		if (index === firstNodeInEachMonth[i].index) {
+			anchorText = `${firstNodeInEachMonth[i].year}年${firstNodeInEachMonth[i].month}月`
+			break
+		}
+	}
+
+	return anchorText
+}
 </script>
 
 <template>
 	<layout-base>
 		<template #page>
-			<Page :key="page.path" :isComment="false" :isSubsidebar="false">
+			<Page
+				:key="page.path"
+				:isComment="false"
+				:isReadingTime="false"
+				:isSubsidebar="false"
+			>
 				<template #content-header-addon>
 					<span class="time-area"
 						>{{ getEarliestAndLatestDate()[0] }} ~
@@ -69,21 +135,24 @@ function getEarliestAndLatestDate() {
 					<div class="time-node-wrapper">
 						<div
 							class="time-line-container"
-							v-for="article of articles"
+							v-for="(article, index) in articles"
 							key="article.path"
 						>
 							<span class="time-node">
 								<div class="article">
-									<span class="title"
-										><router-link :to="article.path">{{
+									<span class="title">
+										<router-link :to="article.path">{{
 											article.info.title
-										}}</router-link></span
-									>
+										}}</router-link>
+									</span>
 									<span class="date">{{
 										new Date(article.info.date).toLocaleString()
 									}}</span>
 									<span class="excerpt">{{ getComputedExcerpt(article) }}</span>
 								</div>
+							</span>
+							<span class="time-record">
+								{{ getAnchorText(index) }}
 							</span>
 						</div>
 					</div>
@@ -168,5 +237,19 @@ function getEarliestAndLatestDate() {
 .total-area {
 	@apply inline-block text-sm font-semibold mr-4
 	text-gray-500;
+}
+
+.time-line-container:nth-child(odd) .time-record,
+.time-line-container:nth-child(even) .time-record {
+	@apply absolute inline-flex w-full h-full top-0 right-0 justify-center items-center
+	text-lg font-thin
+	transition-all transform translate-x-full;
+}
+
+.time-line-container:nth-child(odd) .time-record {
+	@apply right-0 translate-x-full;
+}
+.time-line-container:nth-child(even) .time-record {
+	@apply left-0 -translate-x-full;
 }
 </style>

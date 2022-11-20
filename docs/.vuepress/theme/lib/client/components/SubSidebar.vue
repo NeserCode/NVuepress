@@ -21,7 +21,7 @@ const tocOptions = {
 
 <style lang="postcss" scoped>
 .sub-sidebar {
-	@apply sticky inline-flex pr-4 w-56 text-sm rounded p-2 border
+	@apply sticky inline-flex pr-4 w-56 top-24 right-0 text-sm rounded p-2 border
 	bg-gray-50 border-gray-300 dark:bg-gray-700 dark:border-gray-700
 	bg-opacity-80 dark:bg-opacity-30 backdrop-blur overflow-auto overflow-x-hidden
 	transition-all;
