@@ -13,7 +13,12 @@ const blogCategory = useBlogCategory()
 <template>
 	<layout-base class="neser-theme-tags">
 		<template #page>
-			<Page :key="page.path" :isSubsidebar="false" :isComment="false">
+			<Page
+				:key="page.path"
+				:isSubsidebar="false"
+				:isComment="false"
+				:isReadingTime="false"
+			>
 				<template #content-header-addon>
 					<span class="total"
 						>共 {{ Object.keys(blogCategory.map).length }} 类</span
