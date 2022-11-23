@@ -7,14 +7,15 @@ export const DownToComment = defineComponent({
     name: 'DownToComment',
     setup() {
         const scrollTop = ref(0);
+        const ElementIDSelector = ref('giscus-comment')
         const show = computed(() => scrollTop.value > 300);
         const onScroll = debounce(() => {
             scrollTop.value = getScrollTop();
             nextTick(() => {
-                hasComment.value = !(document.querySelector('#comment') === null)
+                hasComment.value = !(document.querySelector(`#${ElementIDSelector.value}`) === null)
             })
         }, 100);
-        const hasComment = ref(!(document.querySelector('#comment') === null))
+        const hasComment = ref(!(document.querySelector(`#${ElementIDSelector.value}`) === null))
         onMounted(() => {
             scrollTop.value = getScrollTop();
             window.addEventListener('scroll', () => onScroll());
@@ -25,7 +26,7 @@ export const DownToComment = defineComponent({
             class: 'down-to-comment__inner',
         }), h('a', {
             class: 'down-to-comment__link',
-            href: '#comment',
+            href: `#${ElementIDSelector.value}`,
         })]);
         return () => h(Transition, {
             name: 'down-to-comment',

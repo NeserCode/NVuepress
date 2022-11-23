@@ -53,7 +53,7 @@ export default defineUserConfig({
     docsDir: "docs",
     lastUpdatedText: "更新于",
     contributorsText: "由",
-    editLink: true,
+    editLink: false,
     sidebarDepth: 2,
     // change repo text
     repoLabel: "源",

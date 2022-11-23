@@ -42,7 +42,7 @@ onMounted(() => {
 	<div class="giscus-warraper">
 		<Giscus
 			class="giscus-body"
-			id="comment"
+			id="giscus-comment"
 			host="https://giscus.app"
 			:repo="repo"
 			:repoId="repoId"
