@@ -34,13 +34,16 @@
 		"vuepress": "^2.0.0-beta.51",
 		"vuepress-plugin-blog2": "^2.0.0-beta.110",
 		"vuepress-plugin-copy-code2": "^2.0.0-beta.110",
-		"vuepress-plugin-reading-time2": "^2.0.0-beta.110",
-		"vuepress-plugin-md-enhance": "^2.0.0-beta.110"
+		"vuepress-plugin-md-enhance": "^2.0.0-beta.110",
+		"vuepress-plugin-reading-time2": "^2.0.0-beta.110"
 	},
 	"dependencies": {
 		"@giscus/vue": "^2.2.0",
 		"@headlessui/vue": "^1.7.3",
 		"@heroicons/vue": "^2.0.12",
+		"@nesercode/vuepress-neser-back-to-top": "^1.0.0",
+		"@nesercode/vuepress-neser-down-to-comment": "^1.0.0",
+		"@nesercode/vuepress-plugin-theme-nesercode": "^1.1.0",
 		"axios": "^1.0.0-alpha.1"
 	}
 }

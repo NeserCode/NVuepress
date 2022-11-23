@@ -1,3 +1,3 @@
-import { downToCommentPlugin } from '../../../plugin/plugin-down-to-comment'
+import { downToCommentPlugin } from '@nesercode/vuepress-neser-down-to-comment'
 
 export const getDownToCommentPlugin = downToCommentPlugin()

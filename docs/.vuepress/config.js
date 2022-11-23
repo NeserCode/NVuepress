@@ -5,8 +5,7 @@ import { webpackBundler } from "@vuepress/bundler-webpack"
 import { defineUserConfig } from "@vuepress/cli"
 import { shikiPlugin } from "@vuepress/plugin-shiki"
 
-
-import { useThemePlugin } from "./theme/plugin/themePlugin-nesercode"
+import { useThemePlugin } from "@nesercode/vuepress-plugin-theme-nesercode"
 
 import tailwindcss from "tailwindcss"
 import autoprefixer from "autoprefixer"

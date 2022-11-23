@@ -1,3 +1,3 @@
-import { backToTopPlugin } from '../../../plugin/plugin-back-to-top'
+import { backToTopPlugin } from '@nesercode/vuepress-neser-back-to-top'
 
 export const getBackToTopPlugin = backToTopPlugin()
