@@ -23,22 +23,22 @@ permalink: /about
 
   针对该插件提供的数据，自定义开发 reading-time 与 reading-line 组件，协助改进阅读体验。
 
-  Docs:
-  [zh-CN](https://vuepress-theme-hope.github.io/v2/reading-time/zh/) | [en-US](https://vuepress-theme-hope.github.io/v2/reading-time/)
+  - [zh-CN](https://vuepress-theme-hope.github.io/v2/reading-time/zh/)
+  - [en-US](https://vuepress-theme-hope.github.io/v2/reading-time/)
 
 - **vuepress-plugin-copy-code4 ^2.0.0-beta.110**
 
   为代码块提供 _一键复制_ 的功能，同时适配移动端。
 
-  Docs:
-  [zh-CN](https://vuepress-theme-hope.github.io/v2/copy-code/zh/) | [en-US](https://vuepress-theme-hope.github.io/v2/copy-code/)
+  - [zh-CN](https://vuepress-theme-hope.github.io/v2/copy-code/zh/)
+  - [en-US](https://vuepress-theme-hope.github.io/v2/copy-code/)
 
 - **vuepress-plugin-blog2 ^2.0.0-beta.110**
 
   为 Vuepress2 提供 分类标签等数据，是核心组件之一。
 
-  Docs:
-  [zh-CN](https://vuepress-theme-hope.github.io/v2/blog/zh/) | [en-US](https://vuepress-theme-hope.github.io/v2/blog/)
+  - [zh-CN](https://vuepress-theme-hope.github.io/v2/blog/zh/)
+  - [en-US](https://vuepress-theme-hope.github.io/v2/blog/)
 
 ## 联系方式
 
