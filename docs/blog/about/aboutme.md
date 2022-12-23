@@ -40,6 +40,17 @@ permalink: /about
   - [zh-CN](https://vuepress-theme-hope.github.io/v2/blog/zh/)
   - [en-US](https://vuepress-theme-hope.github.io/v2/blog/)
 
+- **vuepress-plugin-md-enhance ^2.0.0-beta.110**
+
+  提供**更强大的** markdown 文档。
+
+  - [zh-CN](https://vuepress-theme-hope.github.io/v2/md-enhance/zh/)
+  - [en-US](https://vuepress-theme-hope.github.io/v2/md-enhance/)
+
+### 鸣谢
+
+感谢以上插件的作者，包括 [vuepress-theme-hope](https://vuepress-theme-hope.github.io/v2) 的作者及贡献者，还有一路上给予我帮助和解答的朋友们。
+
 ## 联系方式
 
 由于是网络页面，这里就不留电话了。留下联系方式仅仅只是为了广交朋友及技术交流，如果没有这方面的意图还请不要添加以下联系方式 :)

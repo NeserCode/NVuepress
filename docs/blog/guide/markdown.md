@@ -3,8 +3,7 @@ pinned: true
 tag:
   - markdown
   - common
-  - default
-  - test-data
+  - official
 ---
 
 # Markdown
